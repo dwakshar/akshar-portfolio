@@ -2,9 +2,10 @@
 
 Personal portfolio site for Akshar Sharma, freelance web developer & designer.
 
-**Live:** https://akshar-portfolio.vercel.app *(update after first Vercel deploy)*
+**Live:** https://dwakshar.vercel.app _(update after first Vercel deploy)_
 
 ## Stack
+
 - Next.js 16 (App Router, TypeScript)
 - Tailwind v4
 - Framer Motion 12
@@ -21,16 +22,17 @@ Personal portfolio site for Akshar Sharma, freelance web developer & designer.
 
 ## Environment variables
 
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | Web3Forms access key (get one at web3forms.com) |
-| `NEXT_PUBLIC_SITE_URL` | Canonical URL — set to the Vercel domain (or custom domain later) |
+| Variable                    | Description                                                       |
+| --------------------------- | ----------------------------------------------------------------- |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Web3Forms access key (get one at web3forms.com)                   |
+| `NEXT_PUBLIC_SITE_URL`      | Canonical URL — set to the Vercel domain (or custom domain later) |
 
 ## Deployment
 
 Push to `main` (or `master`) — Vercel auto-deploys on every push.
 
 After the first deploy:
+
 1. Copy the assigned Vercel URL (e.g. `https://akshar-portfolio.vercel.app`)
 2. In Vercel → Project Settings → Environment Variables, set `NEXT_PUBLIC_SITE_URL` to that URL
 3. Redeploy once to apply
