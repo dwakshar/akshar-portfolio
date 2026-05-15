@@ -288,15 +288,15 @@ export default function Hero() {
             initial="hidden"
             animate="show">
             <motion.div style={{ y: nameScrollY }}>
-            <h1
-              className="font-display font-black leading-none tracking-tight whitespace-nowrap"
-              style={{
-                fontSize: "clamp(5rem, 20vw, 500px)",
-                fontVariationSettings: '"wdth" 65',
-                ...NAME_GRADIENT,
-              }}>
-              {profile.name}
-            </h1>
+              <h1
+                className="font-display font-black leading-none tracking-tight whitespace-nowrap"
+                style={{
+                  fontSize: "clamp(5rem, 20vw, 500px)",
+                  fontVariationSettings: '"wdth" 65',
+                  ...NAME_GRADIENT,
+                }}>
+                {profile.name}
+              </h1>
             </motion.div>
           </motion.div>
         </div>

@@ -86,7 +86,7 @@ export default function AboutPage() {
                   alt="Akshar Sharma"
                   fill
                   sizes="(max-width: 768px) 90vw, 45vw"
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                 />
               </div>
             </Reveal>

@@ -1,11 +1,11 @@
-import Hero from "@/components/sections/Hero";
-import StatsMarquee from "@/components/sections/StatsMarquee";
 import AboutStrip from "@/components/sections/AboutStrip";
 import ClientsMarquee from "@/components/sections/ClientsMarquee";
+import ContactCTA from "@/components/sections/ContactCTA";
+import Hero from "@/components/sections/Hero";
 import SelectedWork from "@/components/sections/SelectedWork";
 import ServicesAccordion from "@/components/sections/ServicesAccordion";
+import StatsMarquee from "@/components/sections/StatsMarquee";
 import Testimonials from "@/components/sections/Testimonials";
-import ContactCTA from "@/components/sections/ContactCTA";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,8 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const jsonLd = {
   "@context": "https://schema.org",

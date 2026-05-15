@@ -1,9 +1,9 @@
-import Cursor from "@/components/ui/Cursor";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import MotionProvider from "@/components/providers/MotionProvider";
 import PageTransition from "@/components/providers/PageTransition";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import Cursor from "@/components/ui/Cursor";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
