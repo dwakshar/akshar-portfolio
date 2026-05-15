@@ -321,7 +321,7 @@ export default function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show">
-            <Portrait className="h-[130vh] w-auto max-w-[56vw]" />
+            <Portrait className="h-[110vh] w-auto max-w-[46vw]" />
           </motion.div>
         </div>
 
