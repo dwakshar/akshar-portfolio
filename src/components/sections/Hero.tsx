@@ -259,7 +259,7 @@ export default function Hero() {
           src="/hero-gradient.png"
           alt=""
           fill
-          className="object-cover object-top"
+          className="object-cover object-center md:object-top"
           priority
           sizes="100vw"
           aria-hidden

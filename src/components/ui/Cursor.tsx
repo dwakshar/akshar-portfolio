@@ -17,7 +17,10 @@ export default function Cursor() {
 
   useEffect(() => {
     setMounted(true);
-    setIsTouch(window.matchMedia("(hover: none) and (pointer: coarse)").matches);
+    setIsTouch(
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
+      navigator.maxTouchPoints > 0
+    );
   }, []);
 
   useEffect(() => {
