@@ -71,7 +71,7 @@ export default function OgImage() {
             textTransform: "uppercase",
             position: "relative",
           }}>
-          Freelance Web Developer &amp; Designer
+          Freelance Developer &amp; Designer
         </div>
         {/* URL */}
         <div
@@ -82,7 +82,7 @@ export default function OgImage() {
             color: "#a1a1a1",
             letterSpacing: "0.08em",
           }}>
-          aksharsharma.com
+          dwakshar.com
         </div>
       </div>
     ),
