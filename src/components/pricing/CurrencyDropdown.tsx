@@ -57,7 +57,7 @@ export default function CurrencyDropdown({ current, onChange }: Props) {
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
             role="listbox"
-            className="absolute right-0 top-full mt-2 w-44 bg-ink-soft border border-hairline rounded-2xl py-2 z-50 shadow-xl"
+            className="absolute left-0 md:left-auto md:right-0 top-full mt-2 w-44 bg-ink-soft border border-hairline rounded-2xl py-2 z-50 shadow-xl"
           >
             {Object.entries(CURRENCY_META).map(([code, meta]) => (
               <li key={code}>

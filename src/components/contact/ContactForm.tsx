@@ -243,31 +243,38 @@ const budgetOptions: SelectOption[] = [
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<Status>("idle");
-  const [selectErrors, setSelectErrors] = useState<Set<string>>(new Set());
+  const [errors, setErrors] = useState<Set<string>>(new Set());
 
-  const updateText =
-    (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
-
-  const updateSelect = (field: keyof FormState) => (value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setSelectErrors((prev) => {
+  const clearError = (field: string) =>
+    setErrors((prev) => {
       const next = new Set(prev);
       next.delete(field);
       return next;
     });
+
+  const updateText =
+    (field: keyof FormState) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+      clearError(field);
+    };
+
+  const updateSelect = (field: keyof FormState) => (value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    clearError(field);
   };
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    // Validate custom selects
-    const errors = new Set<string>();
-    if (!form.projectType) errors.add("projectType");
-    if (!form.budget) errors.add("budget");
-    if (errors.size > 0) {
-      setSelectErrors(errors);
+    const next = new Set<string>();
+    if (!form.name.trim()) next.add("name");
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.add("email");
+    if (!form.projectType) next.add("projectType");
+    if (!form.budget) next.add("budget");
+    if (!form.message.trim()) next.add("message");
+    if (next.size > 0) {
+      setErrors(next);
       return;
     }
 
@@ -297,7 +304,7 @@ export default function ContactForm() {
   const reset = () => {
     setForm(initialForm);
     setStatus("idle");
-    setSelectErrors(new Set());
+    setErrors(new Set());
   };
 
   return (
@@ -322,7 +329,7 @@ export default function ContactForm() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
             {/* Honeypot */}
             <input
               type="checkbox"
@@ -348,12 +355,14 @@ export default function ContactForm() {
                 id="cf-name"
                 type="text"
                 name="name"
-                required
                 placeholder="Your name"
                 value={form.name}
                 onChange={updateText("name")}
-                className={inputClass}
+                className={`${inputClass} ${errors.has("name") ? "border-flush" : ""}`}
               />
+              {errors.has("name") && (
+                <p className="font-sans text-[11px] text-flush mt-1">Please enter your name.</p>
+              )}
             </div>
 
             {/* Email */}
@@ -365,12 +374,14 @@ export default function ContactForm() {
                 id="cf-email"
                 type="email"
                 name="email"
-                required
                 placeholder="you@example.com"
                 value={form.email}
                 onChange={updateText("email")}
-                className={inputClass}
+                className={`${inputClass} ${errors.has("email") ? "border-flush" : ""}`}
               />
+              {errors.has("email") && (
+                <p className="font-sans text-[11px] text-flush mt-1">Please enter a valid email address.</p>
+              )}
             </div>
 
             {/* Project type — custom select */}
@@ -381,14 +392,8 @@ export default function ContactForm() {
               options={projectOptions}
               value={form.projectType}
               onChange={updateSelect("projectType")}
-              hasError={selectErrors.has("projectType")}
-              onInteract={() =>
-                setSelectErrors((prev) => {
-                  const next = new Set(prev);
-                  next.delete("projectType");
-                  return next;
-                })
-              }
+              hasError={errors.has("projectType")}
+              onInteract={() => clearError("projectType")}
             />
 
             {/* Budget — custom select */}
@@ -399,14 +404,8 @@ export default function ContactForm() {
               options={budgetOptions}
               value={form.budget}
               onChange={updateSelect("budget")}
-              hasError={selectErrors.has("budget")}
-              onInteract={() =>
-                setSelectErrors((prev) => {
-                  const next = new Set(prev);
-                  next.delete("budget");
-                  return next;
-                })
-              }
+              hasError={errors.has("budget")}
+              onInteract={() => clearError("budget")}
             />
 
             {/* Message */}
@@ -417,13 +416,15 @@ export default function ContactForm() {
               <textarea
                 id="cf-message"
                 name="message"
-                required
                 rows={4}
                 placeholder="Tell me about your project…"
                 value={form.message}
                 onChange={updateText("message")}
-                className={`${inputClass} resize-y`}
+                className={`${inputClass} resize-y ${errors.has("message") ? "border-flush" : ""}`}
               />
+              {errors.has("message") && (
+                <p className="font-sans text-[11px] text-flush mt-1">Please tell me about your project.</p>
+              )}
             </div>
 
             {/* Submit */}
