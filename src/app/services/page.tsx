@@ -136,7 +136,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── PROCESS ────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading

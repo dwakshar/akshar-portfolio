@@ -14,7 +14,7 @@ export default function ServicesAccordion() {
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? "" : id));
 
   return (
-    <section className="pb-20 md:pb-28">
+    <section className="py-14 md:py-20 border-t border-hairline">
       <div className="px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
         <Reveal>
           <SectionHeading eyebrow="✦ Services" title="How I Help You Grow" />

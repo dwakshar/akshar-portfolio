@@ -95,7 +95,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 
 export default function Testimonials() {
   return (
-    <section className="pb-20 md:pb-28">
+    <section className="py-14 md:py-20 border-t border-hairline">
       <div className="px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
         <Reveal>
           <SectionHeading

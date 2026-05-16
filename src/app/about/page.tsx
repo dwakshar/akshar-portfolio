@@ -126,7 +126,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── STORY ─────────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <div>
             <Reveal>
@@ -150,7 +150,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── PRINCIPLES ────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -194,7 +194,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── PROCESS ───────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
@@ -274,7 +274,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── TOOLKIT ───────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading

@@ -122,7 +122,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
       </section>
 
       {/* ── ANCHOR PRICING ─────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -220,7 +220,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
       </section>
 
       {/* ── RETAINERS ──────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -310,7 +310,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
       </section>
 
       {/* ── ADD-ONS ────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -353,7 +353,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
       </section>
 
       {/* ── PAYMENT MODEL ──────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -388,7 +388,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
       </section>
 
       {/* ── CUSTOM QUOTE ───────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <SectionHeading
@@ -431,7 +431,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-hairline">
+      <section className="py-14 md:py-20 border-t border-hairline">
         <div className="mx-auto max-w-6xl px-6 flex flex-col items-center text-center gap-6">
           <Reveal>
             <Pill>Not sure where you fit?</Pill>
