@@ -73,7 +73,7 @@ export default function ProjectCard({ project }: Props) {
         </div>
 
         {/* ── INFO ZONE ────────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-2 pt-4 px-1">
+        <div className="flex flex-col gap-2 pt-4 px-3">
           <h3
             className="font-display font-black leading-none text-bone text-[clamp(1.35rem,2.4vw,1.85rem)]"
             style={{ fontVariationSettings: '"wdth" 65' }}>
