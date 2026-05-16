@@ -10,14 +10,20 @@ import {
   addOns,
   anchorPricing,
   customQuoteCategories,
-  formatPrice,
   paymentModel,
   retainers,
 } from "@/data/pricing";
+import { CURRENCY_META } from "@/lib/currency-map";
+import type { FxRates } from "@/lib/fx";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useCurrency } from "./CurrencyContext";
-import CurrencyToggle from "./CurrencyToggle";
+import { useState } from "react";
+import CurrencyDropdown from "./CurrencyDropdown";
+
+type Props = {
+  detectedCurrency: string;
+  fxRates: FxRates;
+};
 
 function AnimatedPrice({
   children,
@@ -52,8 +58,24 @@ function CheckItem({ text }: { text: string }) {
   );
 }
 
-export default function PricingContent() {
-  const { currency } = useCurrency();
+export default function PricingContent({ detectedCurrency, fxRates }: Props) {
+  const [currency, setCurrency] = useState(detectedCurrency);
+
+  const meta = CURRENCY_META[currency] ?? CURRENCY_META['USD'];
+  const rate = fxRates.rates[currency as keyof typeof fxRates.rates] ?? 1;
+
+  function formatPrice(usdPrice: number): string {
+    const converted = usdPrice * rate;
+    const rounded =
+      currency === 'INR' || currency === 'AED'
+        ? Math.round(converted / 100) * 100
+        : Math.round(converted / 10) * 10;
+    return new Intl.NumberFormat(meta.locale, {
+      style: 'currency',
+      currency: meta.code,
+      maximumFractionDigits: 0,
+    }).format(rounded);
+  }
 
   return (
     <div className="min-h-[100dvh] bg-ink">
@@ -85,15 +107,15 @@ export default function PricingContent() {
                   let&rsquo;s get moving.
                 </p>
               </Reveal>
-              {/* Toggle: below text on mobile only */}
+              {/* Dropdown: below text on mobile only */}
               <Reveal delay={0.15} className="mt-5 md:hidden">
-                <CurrencyToggle instanceId="mobile" />
+                <CurrencyDropdown current={currency} onChange={setCurrency} />
               </Reveal>
             </div>
 
-            {/* Toggle: right-aligned on desktop */}
+            {/* Dropdown: right-aligned on desktop */}
             <Reveal delay={0.15} className="hidden md:flex items-start pt-10">
-              <CurrencyToggle instanceId="desktop" />
+              <CurrencyDropdown current={currency} onChange={setCurrency} />
             </Reveal>
           </div>
         </div>
@@ -154,7 +176,7 @@ export default function PricingContent() {
                               fontVariationSettings: '"wdth" 65',
                             }}>
                             <AnimatedPrice id={`${service.id}-${currency}`}>
-                              {formatPrice(service.startingAt, currency)}
+                              {formatPrice(service.startingAt)}
                             </AnimatedPrice>
                           </p>
                         </div>
@@ -258,7 +280,7 @@ export default function PricingContent() {
                           fontVariationSettings: '"wdth" 65',
                         }}>
                         <AnimatedPrice id={`${plan.id}-${currency}`}>
-                          {formatPrice(plan.price, currency)}
+                          {formatPrice(plan.priceUsd) + '/mo'}
                         </AnimatedPrice>
                       </p>
 
@@ -437,6 +459,15 @@ export default function PricingContent() {
           </Reveal>
         </div>
       </section>
+
+      {/* FX disclaimer */}
+      <div className="pb-8">
+        <p className="text-xs text-bone-dim/50 text-center px-6">
+          Prices auto-converted from USD at today&rsquo;s rate
+          {fxRates.fetchedAt !== 'fallback' && ` (${fxRates.fetchedAt})`}.
+          Final invoice issued in your selected currency.
+        </p>
+      </div>
 
       <ContactCTA />
     </div>

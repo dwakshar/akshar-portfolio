@@ -1,18 +1,7 @@
-export type Currency = "USD" | "INR";
-
-export interface PriceAmount {
-  usd: string;
-  inr: string;
-}
-
-export function formatPrice(amount: PriceAmount, currency: Currency): string {
-  return currency === "USD" ? amount.usd : amount.inr;
-}
-
 export interface AnchorService {
   id: string;
   title: string;
-  startingAt: PriceAmount;
+  startingAt: number;
   blurb: string;
   highlights: string[];
 }
@@ -20,7 +9,7 @@ export interface AnchorService {
 export interface RetainerPlan {
   id: string;
   title: string;
-  price: PriceAmount;
+  priceUsd: number;
   tagline: string;
   includes: string[];
   featured?: boolean;
@@ -51,7 +40,7 @@ export const anchorPricing: AnchorService[] = [
   {
     id: "landing",
     title: "Landing Pages",
-    startingAt: { usd: "$800", inr: "Rs.25K–40K" },
+    startingAt: 800,
     blurb:
       "A single, high-converting page built to capture leads, sell an offer, or launch a product — designed for speed, clarity, and action from first scroll to final CTA.",
     highlights: [
@@ -64,7 +53,7 @@ export const anchorPricing: AnchorService[] = [
   {
     id: "business",
     title: "Business Websites",
-    startingAt: { usd: "$3,000", inr: "Rs.80K–1.2L" },
+    startingAt: 3000,
     blurb:
       "A polished multi-page presence that builds trust, communicates your value clearly, and turns first-time visitors into paying clients — from homepage through to contact.",
     highlights: [
@@ -77,7 +66,7 @@ export const anchorPricing: AnchorService[] = [
   {
     id: "saas",
     title: "SaaS Marketing Sites",
-    startingAt: { usd: "$5,000", inr: "Rs.1.5L–2L" },
+    startingAt: 5000,
     blurb:
       "A conversion-focused marketing site for your SaaS product — built to explain, demo, and drive sign-ups with the speed, motion, and polish your product deserves.",
     highlights: [
@@ -93,7 +82,7 @@ export const retainers: RetainerPlan[] = [
   {
     id: "care",
     title: "Care Plan",
-    price: { usd: "$400/mo", inr: "Rs.12K–18K/mo" },
+    priceUsd: 400,
     tagline:
       "Keep your site healthy, updated, and running smoothly — without lifting a finger.",
     includes: [
@@ -106,7 +95,7 @@ export const retainers: RetainerPlan[] = [
   {
     id: "growth",
     title: "Growth Retainer",
-    price: { usd: "$900/mo", inr: "Rs.25K–40K/mo" },
+    priceUsd: 900,
     tagline:
       "Regular development hours and strategic input to keep your site improving every single month.",
     includes: [
@@ -120,7 +109,7 @@ export const retainers: RetainerPlan[] = [
   {
     id: "partner",
     title: "Partner Retainer",
-    price: { usd: "$1,800/mo", inr: "Rs.50K–80K/mo" },
+    priceUsd: 1800,
     tagline:
       "A true technical co-pilot — strategy, execution, and always-on support in your corner.",
     includes: [
