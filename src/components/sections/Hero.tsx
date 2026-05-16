@@ -261,7 +261,8 @@ export default function Hero() {
           fill
           className="object-cover object-center md:object-top"
           priority
-          sizes="100vw"
+          quality={100}
+          sizes="(max-width: 768px) 200vw, 100vw"
           aria-hidden
         />
         {/* Noise / star stipple texture */}
