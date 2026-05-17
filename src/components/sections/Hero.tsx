@@ -282,7 +282,7 @@ export default function Hero() {
             className="select-none pointer-events-none"
             style={
               eligible
-                ? { x: nameX, y: nameY, rotateX: tiltX, rotateY: tiltY }
+                ? { x: nameX, y: nameY, rotateX: tiltX, rotateY: tiltY, willChange: "transform" }
                 : undefined
             }
             variants={fadeUp}
@@ -315,6 +315,7 @@ export default function Hero() {
                     rotateX: tiltX,
                     rotateY: tiltY,
                     scale: portraitZ,
+                    willChange: "transform",
                   }
                 : undefined
             }

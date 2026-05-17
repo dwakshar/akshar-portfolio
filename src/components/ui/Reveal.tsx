@@ -41,6 +41,7 @@ export default function Reveal({
       viewport={{ once: true, margin }}
       transition={{ duration, delay, ease: EASE }}
       className={className}
+      style={{ willChange: "opacity, transform" }}
     >
       {children}
     </motion.div>
