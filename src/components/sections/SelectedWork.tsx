@@ -1,5 +1,4 @@
 import Button from "@/components/ui/Button";
-import Pill from "@/components/ui/Pill";
 import ProjectCard from "@/components/ui/ProjectCard";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -36,7 +35,7 @@ export default function SelectedWork() {
         </div>
       </div>
 
-      {/* Desktop: featured card + coming soon panel */}
+      {/* Desktop: 2-col grid */}
       <div className="mx-auto max-w-6xl px-6">
         <div className="hidden md:grid mt-12 gap-6 md:grid-cols-2">
           {featured.map((project, i) => (
@@ -44,27 +43,6 @@ export default function SelectedWork() {
               <ProjectCard project={project} />
             </Reveal>
           ))}
-
-          {/* Right panel — only shown when there's exactly one featured project */}
-          {featured.length === 1 && (
-            <Reveal delay={0.12}>
-              <div className="h-full flex flex-col justify-center gap-5 px-10 rounded-2xl border border-hairline bg-ink-soft">
-                <Pill>More on the way</Pill>
-                <p
-                  className="font-display font-black text-bone leading-tight"
-                  style={{
-                    fontSize: "clamp(1.6rem, 2.8vw, 2.4rem)",
-                    fontVariationSettings: '"wdth" 65',
-                  }}>
-                  More projects coming soon.
-                </p>
-                <p className="font-sans text-sm text-bone-dim leading-relaxed">
-                  One real project beats a portfolio padded with fakes. Next
-                  case studies will be added as they ship.
-                </p>
-              </div>
-            </Reveal>
-          )}
         </div>
 
         {/* Mobile CTA */}

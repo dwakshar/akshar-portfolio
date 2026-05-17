@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import Pill from "@/components/ui/Pill";
 import Reveal from "@/components/ui/Reveal";
 import { projects } from "@/data/projects";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, GitBranch } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
-  const description = project.intro.split(".")[0] + ".";
+  const description = project.challenge.split(".")[0] + ".";
   const url = `https://aksharsharma.com/work/${slug}`;
   return {
     title: project.title,
@@ -50,6 +50,20 @@ export default async function CaseStudyPage({ params }: Props) {
   const prevProject = projects.length > 1 ? projects[(idx - 1 + projects.length) % projects.length] : null;
   const nextProject = projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
 
+  const statusLabel =
+    project.status === "live"
+      ? "Live"
+      : project.status === "open-source"
+      ? "Open Source"
+      : project.status === "wip"
+      ? "In Progress"
+      : null;
+
+  const statusStyle =
+    project.status === "live" || project.status === "open-source"
+      ? "bg-flush/10 border-flush/30 text-flush"
+      : "";
+
   return (
     <div className="min-h-[100dvh] bg-ink">
       <div className="mx-auto max-w-5xl px-6">
@@ -63,18 +77,17 @@ export default async function CaseStudyPage({ params }: Props) {
           </Link>
         </div>
 
-        {/* ── HEADER BLOCK ───────────────────────────────────────────────── */}
+        {/* ── 1. HEADER ──────────────────────────────────────────────────── */}
         <Reveal variant="reveal">
-          <div className="flex flex-col gap-4 pb-10 border-b border-hairline">
-            <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex flex-col gap-5 pb-10 border-b border-hairline">
+            <div className="flex items-center gap-2 flex-wrap">
               <Pill className="self-start">{project.category}</Pill>
               <Pill className="self-start">{project.year}</Pill>
-              {project.status === "live" && (
-                <Pill className="self-start bg-flush/10 border-flush/30 text-flush">
-                  Live
-                </Pill>
+              {statusLabel && (
+                <Pill className={`self-start ${statusStyle}`}>{statusLabel}</Pill>
               )}
             </div>
+
             <h1
               className="font-display font-black text-bone leading-[0.9] tracking-tight"
               style={{
@@ -83,10 +96,36 @@ export default async function CaseStudyPage({ params }: Props) {
               }}>
               {project.title}
             </h1>
+
+            <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-2xl">
+              {project.tagline}
+            </p>
+
+            {/* CTA buttons */}
+            <div className="flex items-center gap-3 flex-wrap pt-1">
+              {project.liveUrl && (
+                <Button
+                  href={project.liveUrl}
+                  variant="primary"
+                  size="md"
+                  icon={<ExternalLink className="w-4 h-4" />}>
+                  Visit live site
+                </Button>
+              )}
+              {project.repoUrl && (
+                <Button
+                  href={project.repoUrl}
+                  variant="ghost"
+                  size="md"
+                  icon={<GitBranch className="w-4 h-4" />}>
+                  View on GitHub
+                </Button>
+              )}
+            </div>
           </div>
         </Reveal>
 
-        {/* ── HERO IMAGE ─────────────────────────────────────────────────── */}
+        {/* ── 2. COVER IMAGE ─────────────────────────────────────────────── */}
         <Reveal variant="reveal" delay={0.1}>
           <div className="mt-10 relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-hairline bg-ink-soft">
             <Image
@@ -100,19 +139,36 @@ export default async function CaseStudyPage({ params }: Props) {
           </div>
         </Reveal>
 
-        {/* ── INTRO ──────────────────────────────────────────────────────── */}
-        <Reveal variant="fade" delay={0.08}>
-          <p className="mt-12 font-sans text-base md:text-lg text-bone-dim leading-relaxed">
-            {project.intro}
-          </p>
+        {/* ── 3. CHALLENGE ───────────────────────────────────────────────── */}
+        <Reveal variant="fade" delay={0.06}>
+          <div className="mt-16">
+            <p className="font-sans text-xs uppercase tracking-widest text-flush mb-3">
+              The Challenge
+            </p>
+            <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed">
+              {project.challenge}
+            </p>
+          </div>
         </Reveal>
 
-        {/* ── META STRIP: SERVICES + DELIVERABLES ────────────────────────── */}
+        {/* ── 4. APPROACH ────────────────────────────────────────────────── */}
+        <Reveal variant="fade" delay={0.06}>
+          <div className="mt-14">
+            <p className="font-sans text-xs uppercase tracking-widest text-flush mb-3">
+              The Approach
+            </p>
+            <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed">
+              {project.approach}
+            </p>
+          </div>
+        </Reveal>
+
+        {/* ── 5 & 6. SERVICES + DELIVERABLES ─────────────────────────────── */}
         <Reveal delay={0.06}>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-0 border border-hairline rounded-2xl overflow-hidden">
             <div className="p-8 border-b border-hairline md:border-b-0 md:border-r">
               <p className="font-sans text-xs uppercase tracking-widest text-flush mb-5">
-                Services
+                What was built
               </p>
               <ul className="flex flex-col gap-2.5">
                 {project.services.map((s) => (
@@ -143,29 +199,21 @@ export default async function CaseStudyPage({ params }: Props) {
           </div>
         </Reveal>
 
-        {/* ── CHALLENGE / APPROACH / OUTCOME ─────────────────────────────── */}
-        <div className="mt-16 flex flex-col gap-14">
-          {(
-            [
-              { label: "The Challenge", body: project.challenge },
-              { label: "The Approach", body: project.approach },
-              { label: "The Outcome", body: project.outcome },
-            ] as const
-          ).map(({ label, body }, i) => (
-            <Reveal key={label} variant="fade" delay={i * 0.06}>
-              <p className="font-sans text-xs uppercase tracking-widest text-flush mb-3">
-                {label}
-              </p>
-              <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed">
-                {body}
-              </p>
-            </Reveal>
-          ))}
-        </div>
+        {/* ── 7. OUTCOME ─────────────────────────────────────────────────── */}
+        <Reveal variant="fade" delay={0.06}>
+          <div className="mt-14">
+            <p className="font-sans text-xs uppercase tracking-widest text-flush mb-3">
+              The Outcome
+            </p>
+            <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed">
+              {project.outcome}
+            </p>
+          </div>
+        </Reveal>
 
-        {/* ── RESULTS ────────────────────────────────────────────────────── */}
+        {/* ── 8. RESULTS ─────────────────────────────────────────────────── */}
         <Reveal delay={0.06}>
-          <div className="mt-20 p-8 md:p-12 rounded-2xl border border-hairline bg-ink-soft">
+          <div className="mt-14 p-8 md:p-12 rounded-2xl border border-hairline bg-ink-soft">
             <p className="font-sans text-xs uppercase tracking-widest text-flush mb-10">
               Results
             </p>
@@ -189,7 +237,7 @@ export default async function CaseStudyPage({ params }: Props) {
           </div>
         </Reveal>
 
-        {/* ── STACK ──────────────────────────────────────────────────────── */}
+        {/* ── 9. STACK ───────────────────────────────────────────────────── */}
         <Reveal delay={0.06}>
           <div className="mt-8 p-8 rounded-2xl border border-hairline">
             <p className="font-sans text-xs uppercase tracking-widest text-flush mb-6">
@@ -203,7 +251,7 @@ export default async function CaseStudyPage({ params }: Props) {
           </div>
         </Reveal>
 
-        {/* ── GALLERY ────────────────────────────────────────────────────── */}
+        {/* ── 10. GALLERY ────────────────────────────────────────────────── */}
         {project.thumbnails.length > 0 && (
           <>
             {/* Mobile: horizontal swipe strip */}
@@ -249,21 +297,6 @@ export default async function CaseStudyPage({ params }: Props) {
               </div>
             </Reveal>
           </>
-        )}
-
-        {/* ── LIVE URL ───────────────────────────────────────────────────── */}
-        {project.liveUrl && (
-          <Reveal delay={0.06}>
-            <div className="mt-14 flex justify-start">
-              <Button
-                href={project.liveUrl}
-                variant="primary"
-                size="lg"
-                icon={<ExternalLink className="w-4 h-4" />}>
-                Visit live site
-              </Button>
-            </div>
-          </Reveal>
         )}
 
         {/* ── PREV / NEXT NAVIGATION ─────────────────────────────────────── */}
