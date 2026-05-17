@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
   const description = project.intro.split(".")[0] + ".";
-  const url = `https://aksharsharma.com/work/${slug}`; // P11: confirm domain
+  const url = `https://aksharsharma.com/work/${slug}`;
   return {
     title: project.title,
     description,
@@ -31,19 +31,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url,
       type: "article",
-      images: [
-        {
-          url: project.thumbnail,
-          width: 1200,
-          height: 630,
-          alt: project.title,
-        },
-      ],
+      images: [{ url: project.cover, width: 1200, height: 630, alt: project.title }],
     },
     twitter: {
       title: `${project.title} — Akshar Sharma`,
       description,
-      images: [project.thumbnail],
+      images: [project.cover],
     },
   };
 }
@@ -54,8 +47,8 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   const idx = projects.findIndex((p) => p.slug === slug);
-  const prevProject = projects[(idx - 1 + projects.length) % projects.length];
-  const nextProject = projects[(idx + 1) % projects.length];
+  const prevProject = projects.length > 1 ? projects[(idx - 1 + projects.length) % projects.length] : null;
+  const nextProject = projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
 
   return (
     <div className="min-h-[100dvh] bg-ink">
@@ -73,7 +66,15 @@ export default async function CaseStudyPage({ params }: Props) {
         {/* ── HEADER BLOCK ───────────────────────────────────────────────── */}
         <Reveal variant="reveal">
           <div className="flex flex-col gap-4 pb-10 border-b border-hairline">
-            <Pill className="self-start">{project.category}</Pill>
+            <div className="flex items-center gap-3 flex-wrap">
+              <Pill className="self-start">{project.category}</Pill>
+              <Pill className="self-start">{project.year}</Pill>
+              {project.status === "live" && (
+                <Pill className="self-start bg-flush/10 border-flush/30 text-flush">
+                  Live
+                </Pill>
+              )}
+            </div>
             <h1
               className="font-display font-black text-bone leading-[0.9] tracking-tight"
               style={{
@@ -82,14 +83,6 @@ export default async function CaseStudyPage({ params }: Props) {
               }}>
               {project.title}
             </h1>
-            <div className="flex items-center gap-4 font-sans text-sm text-bone-dim">
-              <span>{project.client}</span>
-              <span
-                className="w-1 h-1 rounded-full bg-bone-dim/40"
-                aria-hidden
-              />
-              <span>{project.year}</span>
-            </div>
           </div>
         </Reveal>
 
@@ -97,7 +90,7 @@ export default async function CaseStudyPage({ params }: Props) {
         <Reveal variant="reveal" delay={0.1}>
           <div className="mt-10 relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-hairline bg-ink-soft">
             <Image
-              src={project.gallery[0] ?? project.thumbnail}
+              src={project.cover}
               alt={project.title}
               fill
               priority
@@ -182,7 +175,7 @@ export default async function CaseStudyPage({ params }: Props) {
                   <span
                     className="font-display font-black text-flush leading-none"
                     style={{
-                      fontSize: "clamp(2rem, 4.5vw, 3rem)",
+                      fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
                       fontVariationSettings: '"wdth" 65',
                     }}>
                     {r.value}
@@ -196,19 +189,33 @@ export default async function CaseStudyPage({ params }: Props) {
           </div>
         </Reveal>
 
+        {/* ── STACK ──────────────────────────────────────────────────────── */}
+        <Reveal delay={0.06}>
+          <div className="mt-8 p-8 rounded-2xl border border-hairline">
+            <p className="font-sans text-xs uppercase tracking-widest text-flush mb-6">
+              Built with
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.stack.map((tech) => (
+                <Pill key={tech}>{tech}</Pill>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
         {/* ── GALLERY ────────────────────────────────────────────────────── */}
-        {project.gallery.length > 1 && (
+        {project.thumbnails.length > 0 && (
           <>
             {/* Mobile: horizontal swipe strip */}
             <div className="mt-16 md:hidden -mx-6">
               <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 pl-6 scroll-pl-6">
-                {project.gallery.slice(1).map((src, i) => (
+                {project.thumbnails.map((src, i) => (
                   <div
                     key={src}
                     className="snap-start shrink-0 w-[82vw] relative aspect-[4/3] overflow-hidden rounded-2xl border border-hairline bg-ink-soft">
                     <Image
                       src={src}
-                      alt={`${project.title} — image ${i + 2}`}
+                      alt={`${project.title} — image ${i + 1}`}
                       fill
                       className="object-cover"
                       sizes="82vw"
@@ -222,17 +229,17 @@ export default async function CaseStudyPage({ params }: Props) {
             {/* Desktop: grid */}
             <Reveal delay={0.06}>
               <div className="mt-16 hidden md:grid grid-cols-2 gap-4">
-                {project.gallery.slice(1).map((src, i) => (
+                {project.thumbnails.map((src, i) => (
                   <div
                     key={src}
                     className={`relative overflow-hidden rounded-2xl border border-hairline bg-ink-soft ${
-                      i === 0 && project.gallery.length === 2
+                      i === 0 && project.thumbnails.length === 1
                         ? "col-span-2 aspect-[16/9]"
                         : "aspect-[4/3]"
                     }`}>
                     <Image
                       src={src}
-                      alt={`${project.title} — image ${i + 2}`}
+                      alt={`${project.title} — image ${i + 1}`}
                       fill
                       className="object-cover"
                       sizes="480px"
@@ -260,41 +267,43 @@ export default async function CaseStudyPage({ params }: Props) {
         )}
 
         {/* ── PREV / NEXT NAVIGATION ─────────────────────────────────────── */}
-        <Reveal delay={0.04}>
-          <div className="mt-24 mb-20 pt-10 border-t border-hairline grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link
-              href={`/work/${prevProject.slug}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-hairline bg-ink-soft hover:border-bone/20 transition-colors duration-200">
-              <span className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-bone-dim group-hover:text-flush transition-colors duration-200">
-                <ArrowLeft className="w-3.5 h-3.5" />
-                Previous
-              </span>
-              <span
-                className="font-display font-black text-bone leading-none text-[clamp(1.2rem,2.5vw,1.6rem)]"
-                style={{ fontVariationSettings: '"wdth" 65' }}>
-                {prevProject.title}
-              </span>
-              <Pill className="self-start mt-1">{prevProject.category}</Pill>
-            </Link>
+        {prevProject && nextProject && (
+          <Reveal delay={0.04}>
+            <div className="mt-24 mb-20 pt-10 border-t border-hairline grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Link
+                href={`/work/${prevProject.slug}`}
+                className="group flex flex-col gap-2 p-6 rounded-2xl border border-hairline bg-ink-soft hover:border-bone/20 transition-colors duration-200">
+                <span className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-bone-dim group-hover:text-flush transition-colors duration-200">
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  Previous
+                </span>
+                <span
+                  className="font-display font-black text-bone leading-none text-[clamp(1.2rem,2.5vw,1.6rem)]"
+                  style={{ fontVariationSettings: '"wdth" 65' }}>
+                  {prevProject.title}
+                </span>
+                <Pill className="self-start mt-1">{prevProject.category}</Pill>
+              </Link>
 
-            <Link
-              href={`/work/${nextProject.slug}`}
-              className="group flex flex-col gap-2 p-6 rounded-2xl border border-hairline bg-ink-soft hover:border-bone/20 transition-colors duration-200 sm:items-end sm:text-right">
-              <span className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-bone-dim group-hover:text-flush transition-colors duration-200">
-                Next
-                <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-              <span
-                className="font-display font-black text-bone leading-none text-[clamp(1.2rem,2.5vw,1.6rem)]"
-                style={{ fontVariationSettings: '"wdth" 65' }}>
-                {nextProject.title}
-              </span>
-              <Pill className="self-start sm:self-end mt-1">
-                {nextProject.category}
-              </Pill>
-            </Link>
-          </div>
-        </Reveal>
+              <Link
+                href={`/work/${nextProject.slug}`}
+                className="group flex flex-col gap-2 p-6 rounded-2xl border border-hairline bg-ink-soft hover:border-bone/20 transition-colors duration-200 sm:items-end sm:text-right">
+                <span className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-bone-dim group-hover:text-flush transition-colors duration-200">
+                  Next
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+                <span
+                  className="font-display font-black text-bone leading-none text-[clamp(1.2rem,2.5vw,1.6rem)]"
+                  style={{ fontVariationSettings: '"wdth" 65' }}>
+                  {nextProject.title}
+                </span>
+                <Pill className="self-start sm:self-end mt-1">{nextProject.category}</Pill>
+              </Link>
+            </div>
+          </Reveal>
+        )}
+
+        {!(prevProject && nextProject) && <div className="pb-24" />}
       </div>
     </div>
   );
