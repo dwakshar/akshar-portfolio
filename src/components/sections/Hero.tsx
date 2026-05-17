@@ -315,14 +315,15 @@ export default function Hero() {
                     rotateX: tiltX,
                     rotateY: tiltY,
                     scale: portraitZ,
-                    translateY: "18%",
                   }
-                : { translateY: "18%" }
+                : undefined
             }
             variants={fadeUp}
             initial="hidden"
             animate="show">
-            <Portrait className="h-[110vh] w-auto max-w-[46vw]" />
+            <div className="translate-y-[18%]">
+              <Portrait className="h-[110vh] w-auto max-w-none lg:max-w-[52vw] xl:max-w-[46vw]" />
+            </div>
           </motion.div>
         </div>
 

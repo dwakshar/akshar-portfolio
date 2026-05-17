@@ -200,7 +200,7 @@ export default async function CaseStudyPage({ params }: Props) {
         {project.gallery.length > 1 && (
           <>
             {/* Mobile: horizontal swipe strip */}
-            <div className="mt-16 md:hidden">
+            <div className="mt-16 md:hidden -mx-6">
               <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 pl-6 scroll-pl-6">
                 {project.gallery.slice(1).map((src, i) => (
                   <div
