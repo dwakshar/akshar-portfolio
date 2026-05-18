@@ -105,7 +105,7 @@ export default async function CaseStudyPage({ params }: Props) {
               {project.title}
             </h1>
 
-            <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-2xl">
+            <p className="font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
               {project.tagline}
             </p>
 

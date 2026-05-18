@@ -16,6 +16,7 @@ export interface Project {
   approach: string;
   outcome: string;
   results: ResultStat[];
+  clientType?: string;
   // Meta
   stack: string[];
   category: string;
@@ -155,6 +156,79 @@ export const projects: Project[] = [
       "/work/humora/reviews.png",
       "/work/humora/popup.png",
       "/work/humora/popup2.png",
+    ],
+  },
+  {
+    slug: "mai-re",
+    title: "Mai Re",
+    tagline:
+      "A heritage spice brand's first website — built as a showcase, not a checkout, because WhatsApp was already where the business happened.",
+    description:
+      "Mai Re is a family-owned spice business whose sales happen entirely through WhatsApp conversations. The site needed to bring online discovery without disrupting that model — a CMS-backed showcase with an enquiry-to-WhatsApp flow, built to run at ₹0/month so the owner keeps full control without a recurring SaaS bill.",
+
+    services: [
+      "Brand-aligned design system from logo derivation (maroon + gold heritage palette, Cormorant + Inter typography)",
+      "Five-page showcase site: Home, Catalog, Product Detail, About, Contact",
+      "Sanity CMS integration with owner-editable schemas for products, categories, and site-wide content",
+      "Enquiry list flow that batches selected items into a single pre-filled WhatsApp message",
+      "Catalog with client-side search, category filters, and sort",
+      "Mobile-first responsive build with motion polish (Framer Motion)",
+      "SEO setup, Vercel deployment, and owner handoff with training documentation",
+    ],
+
+    deliverables: [
+      "Production site live on Vercel, custom-domain ready",
+      "Sanity Studio embedded at /studio with three schemas (product, category, siteSettings) and logical Studio structure",
+      "Variant-aware enquiry system: weight selection, quantity controls, persistent across sessions via localStorage",
+      "WhatsApp deep-link generator that formats the order into a clean, copy-ready message",
+      "Floating WhatsApp button on every page for general enquiries",
+      "Resend-powered contact form as backup channel",
+      "Heritage design system documented in tailwind.config.ts (maroon, gold, cream, ink tokens)",
+      "Owner training session (recorded) and one-page PDF for adding/editing products without developer help",
+    ],
+
+    challenge:
+      "The client runs a family-owned spice business where every sale starts with a WhatsApp conversation — pricing flexes, wholesale enquiries get negotiated, trust is built one chat at a time. A standard e-commerce build would have broken what was already working. The site needed to bring online discovery to the business without replacing the human conversation that converted browsers into buyers. And the owner — non-technical — needed to be able to add products, update prices, and mark items out of stock on her own, forever, without calling a developer.",
+
+    approach:
+      "The architecture was inverted from a typical e-commerce build: no checkout, no payment gateway, no inventory counts, no user accounts. Instead, the catalog feeds an enquiry-list pattern — visitors add items with variant and quantity, and a single button serialises the entire cart into a pre-filled WhatsApp message. The conversation continues exactly where it always did, but now with a clean order summary instead of back-and-forth questions. For owner autonomy, Sanity CMS sits behind every piece of editable content — products, categories, hero copy, contact info — with Studio embedded at /studio so there's one URL to remember and no second login. The design system was derived from the brand's existing logo (maroon wordmark, gold leaf mark) rather than imposed on it: warm cream backgrounds instead of pure white, Cormorant Garamond for editorial weight, gold used once per screen as a restraint signal. Operating cost was held at ₹0/month at launch by running entirely on free tiers (Vercel, Sanity, Resend) — important for a small business that didn't want a recurring SaaS bill attached to its website.",
+
+    outcome:
+      "Shipped as a five-page production site with full CMS autonomy for the owner. Every product page, category, and site-wide string is editable from Sanity Studio without code changes. The enquiry-to-WhatsApp flow tested end-to-end on iOS and Android — orders arrive in WhatsApp formatted and ready to confirm. The site honours the brand's heritage positioning (no market-fresh modernism, no e-commerce template feel) and stays out of the way of the conversation that closes sales.",
+
+    results: [
+      { label: "Pages, production-ready", value: "5" },
+      { label: "Monthly operating cost", value: "₹0" },
+      { label: "From catalog to formatted WhatsApp order", value: "1 tap" },
+      { label: "Developer calls needed to update products", value: "0" },
+    ],
+
+    stack: [
+      "Next.js 15",
+      "TypeScript",
+      "Sanity CMS",
+      "Tailwind CSS",
+      "Zustand",
+      "Framer Motion",
+      "Fuse.js",
+      "Resend",
+      "Vercel",
+    ],
+    category: "Client Work — Showcase & CMS",
+    year: "2026",
+    liveUrl: "https://mai-re-td19.vercel.app",
+    repoUrl: null,
+    status: "live",
+    featured: true,
+    clientType: "Family-owned spice business",
+    cover: "/work/mai-re/cover.png",
+    thumbnails: [
+      "/work/mai-re/hero.png",
+      "/work/mai-re/explore-range.png",
+      "/work/mai-re/budget-tiles.png",
+      "/work/mai-re/why-families.png",
+      "/work/mai-re/catalog.png",
+      "/work/mai-re/contact.png",
     ],
   },
 ];

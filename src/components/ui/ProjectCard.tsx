@@ -91,6 +91,15 @@ export default function ProjectCard({ project }: Props) {
                 "linear-gradient(to top, rgba(8,8,12,0.8) 0%, transparent 100%)",
             }}
           />
+
+          {/* Layer 4 — client work badge */}
+          {project.clientType && (
+            <div className="absolute top-3 left-3 z-30">
+              <Pill className="bg-flush/10 border-flush/30 text-flush">
+                Client Work
+              </Pill>
+            </div>
+          )}
         </div>
 
         {/* ── INFO ZONE ────────────────────────────────────────────────── */}
