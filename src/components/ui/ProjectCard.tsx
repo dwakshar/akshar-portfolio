@@ -92,14 +92,6 @@ export default function ProjectCard({ project }: Props) {
             }}
           />
 
-          {/* Layer 4 — client work badge */}
-          {project.clientType && (
-            <div className="absolute top-3 left-3 z-30">
-              <Pill className="bg-flush/10 border-flush/30 text-flush">
-                Client Work
-              </Pill>
-            </div>
-          )}
         </div>
 
         {/* ── INFO ZONE ────────────────────────────────────────────────── */}

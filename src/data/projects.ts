@@ -16,7 +16,7 @@ export interface Project {
   approach: string;
   outcome: string;
   results: ResultStat[];
-  clientType?: string;
+  isClientWork?: boolean;
   // Meta
   stack: string[];
   category: string;
@@ -220,15 +220,14 @@ export const projects: Project[] = [
     repoUrl: null,
     status: "live",
     featured: true,
-    clientType: "Family-owned spice business",
+    isClientWork: true,
     cover: "/work/mai-re/cover.png",
     thumbnails: [
       "/work/mai-re/hero.png",
-      "/work/mai-re/explore-range.png",
-      "/work/mai-re/budget-tiles.png",
-      "/work/mai-re/why-families.png",
-      "/work/mai-re/catalog.png",
+      "/work/mai-re/products.png",
       "/work/mai-re/contact.png",
+      "/work/mai-re/product-preview.png",
+      "/work/mai-re/about.png",
     ],
   },
 ];
