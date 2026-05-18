@@ -31,7 +31,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url,
       type: "article",
-      images: [{ url: project.cover, width: 1200, height: 630, alt: project.title }],
+      images: [
+        { url: project.cover, width: 1200, height: 630, alt: project.title },
+      ],
     },
     twitter: {
       title: `${project.title} — Akshar Sharma`,
@@ -47,8 +49,12 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   const idx = projects.findIndex((p) => p.slug === slug);
-  const prevProject = projects.length > 1 ? projects[(idx - 1 + projects.length) % projects.length] : null;
-  const nextProject = projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
+  const prevProject =
+    projects.length > 1
+      ? projects[(idx - 1 + projects.length) % projects.length]
+      : null;
+  const nextProject =
+    projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
 
   const statusLabel =
     project.status === "live"
@@ -84,7 +90,9 @@ export default async function CaseStudyPage({ params }: Props) {
               <Pill className="self-start">{project.category}</Pill>
               <Pill className="self-start">{project.year}</Pill>
               {statusLabel && (
-                <Pill className={`self-start ${statusStyle}`}>{statusLabel}</Pill>
+                <Pill className={`self-start ${statusStyle}`}>
+                  {statusLabel}
+                </Pill>
               )}
             </div>
 
@@ -330,7 +338,9 @@ export default async function CaseStudyPage({ params }: Props) {
                   style={{ fontVariationSettings: '"wdth" 65' }}>
                   {nextProject.title}
                 </span>
-                <Pill className="self-start sm:self-end mt-1">{nextProject.category}</Pill>
+                <Pill className="self-start sm:self-end mt-1">
+                  {nextProject.category}
+                </Pill>
               </Link>
             </div>
           </Reveal>
