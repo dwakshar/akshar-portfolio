@@ -1,39 +1,30 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
-import { getFxRates } from "@/lib/fx";
-import { COUNTRY_TO_CURRENCY } from "@/lib/currency-map";
+import { getMarket } from "@/lib/pricing/get-market";
+import { pricingByMarket } from "@/lib/data/pricing";
 import PricingContent from "@/components/pricing/PricingContent";
 
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent starting prices for landing pages, business websites, SaaS marketing sites, and monthly retainers. Every project begins with a free discovery call.",
+    "Transparent starting prices for landing pages, business websites, and custom builds. Every project begins with a free discovery call.",
   alternates: { canonical: "https://aksharsharma.com/pricing" },
   openGraph: {
     title: "Pricing — Akshar Sharma",
     description:
-      "Transparent starting prices for landing pages, business websites, SaaS marketing sites, and monthly retainers.",
+      "Transparent starting prices for landing pages, business websites, and custom builds.",
     url: "https://aksharsharma.com/pricing",
     type: "website",
   },
   twitter: {
     title: "Pricing — Akshar Sharma",
     description:
-      "Transparent starting prices for landing pages, business websites, SaaS marketing sites, and retainers.",
+      "Transparent starting prices for landing pages, business websites, and custom builds.",
   },
 };
 
 export default async function PricingPage() {
-  const headersList = await headers();
-  const country =
-    headersList.get("x-vercel-ip-country") ||
-    process.env.NEXT_PUBLIC_DEV_COUNTRY ||
-    "US";
-  const detectedCurrency = COUNTRY_TO_CURRENCY[country] || "USD";
+  const market = await getMarket();
+  const marketPricing = pricingByMarket[market];
 
-  const fxRates = await getFxRates();
-
-  return (
-    <PricingContent detectedCurrency={detectedCurrency} fxRates={fxRates} />
-  );
+  return <PricingContent marketPricing={marketPricing} />;
 }

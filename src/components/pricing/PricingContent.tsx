@@ -6,46 +6,15 @@ import Card from "@/components/ui/Card";
 import Pill from "@/components/ui/Pill";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import {
-  addOns,
-  anchorPricing,
-  customQuoteCategories,
-  paymentModel,
-  retainers,
-} from "@/data/pricing";
-import { CURRENCY_META } from "@/lib/currency-map";
-import type { FxRates } from "@/lib/fx";
-import { AnimatePresence, motion } from "framer-motion";
+import { addOns, customQuoteCategories, paymentModel } from "@/data/pricing";
+import type { MarketPricing } from "@/lib/data/pricing";
+import { formatPrice } from "@/lib/pricing/format-price";
+import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useState } from "react";
-import CurrencyDropdown from "./CurrencyDropdown";
 
 type Props = {
-  detectedCurrency: string;
-  fxRates: FxRates;
+  marketPricing: MarketPricing;
 };
-
-function AnimatedPrice({
-  children,
-  id,
-}: {
-  children: React.ReactNode;
-  id: string;
-}) {
-  return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.span
-        key={id}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.1, ease: "linear" }}
-        className="inline-block">
-        {children}
-      </motion.span>
-    </AnimatePresence>
-  );
-}
 
 function CheckItem({ text }: { text: string }) {
   return (
@@ -58,66 +27,37 @@ function CheckItem({ text }: { text: string }) {
   );
 }
 
-export default function PricingContent({ detectedCurrency, fxRates }: Props) {
-  const [currency, setCurrency] = useState(detectedCurrency);
-
-  const meta = CURRENCY_META[currency] ?? CURRENCY_META['USD'];
-  const rate = fxRates.rates[currency as keyof typeof fxRates.rates] ?? 1;
-
-  function formatPrice(usdPrice: number): string {
-    const converted = usdPrice * rate;
-    const rounded =
-      currency === 'INR' || currency === 'AED'
-        ? Math.round(converted / 100) * 100
-        : Math.round(converted / 10) * 10;
-    return new Intl.NumberFormat(meta.locale, {
-      style: 'currency',
-      currency: meta.code,
-      maximumFractionDigits: 0,
-    }).format(rounded);
-  }
+export default function PricingContent({ marketPricing }: Props) {
+  const { currency, symbol, locale, tiers } = marketPricing;
 
   return (
     <div className="min-h-[100dvh] bg-ink">
       {/* ── PAGE HERO ──────────────────────────────────────────────────── */}
       <section className="pt-20 pb-16 md:pt-28 md:pb-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-            <div className="flex-1">
-              <Reveal>
-                <span className="font-sans text-sm font-medium text-flush tracking-widest uppercase">
-                  ✦ Pricing
-                </span>
-                <h1
-                  className="font-display font-black text-bone leading-[0.92] tracking-tight mt-2"
-                  style={{
-                    fontSize: "clamp(3rem, 9vw, 6.5rem)",
-                    fontVariationSettings: '"wdth" 65',
-                  }}>
-                  Honest pricing.
-                  <br />
-                  No surprises.
-                </h1>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="mt-5 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
-                  Every project starts with a discovery call so we can scope the
-                  right fit — the starting prices below are a genuine baseline,
-                  not a bait-and-switch. Pick a plan, add what you need, and
-                  let&rsquo;s get moving.
-                </p>
-              </Reveal>
-              {/* Dropdown: below text on mobile only */}
-              <Reveal delay={0.15} className="mt-5 md:hidden">
-                <CurrencyDropdown current={currency} onChange={setCurrency} />
-              </Reveal>
-            </div>
-
-            {/* Dropdown: right-aligned on desktop */}
-            <Reveal delay={0.15} className="hidden md:flex items-start pt-10">
-              <CurrencyDropdown current={currency} onChange={setCurrency} />
-            </Reveal>
-          </div>
+          <Reveal>
+            <span className="font-sans text-sm font-medium text-flush tracking-widest uppercase">
+              ✦ Pricing
+            </span>
+            <h1
+              className="font-display font-black text-bone leading-[0.92] tracking-tight mt-2"
+              style={{
+                fontSize: "clamp(3rem, 9vw, 6.5rem)",
+                fontVariationSettings: '"wdth" 65',
+              }}>
+              Honest pricing.
+              <br />
+              No surprises.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-5 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
+              Every project starts with a discovery call so we can scope the
+              right fit — the starting prices below are a genuine baseline,
+              not a bait-and-switch. Pick a plan, add what you need, and
+              let&rsquo;s get moving.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -139,165 +79,71 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
           </Reveal>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:items-stretch">
-            {anchorPricing.map((service, i) => {
-              const isFeatured = service.id === "business";
-              return (
-                <Reveal key={service.id} delay={i * 0.1} className="h-full">
-                  <motion.div
-                    whileHover={
-                      isFeatured
-                        ? { y: -6, boxShadow: "0 24px 60px rgba(0,0,0,0.6)" }
-                        : undefined
-                    }
-                    transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                    className={
-                      isFeatured
-                        ? "h-full rounded-2xl ring-1 ring-flush/40 shadow-[0_0_40px_rgba(255,31,143,0.12)]"
-                        : "h-full"
-                    }>
-                    <Card noHover={isFeatured} className="h-full">
-                      <div className="p-6 flex flex-col gap-5 h-full">
-                        {/* Featured badge */}
-                        {isFeatured && (
-                          <Pill className="self-start bg-flush/10 border-flush/30 text-flush">
-                            Most popular
-                          </Pill>
-                        )}
-
-                        {/* Price block */}
-                        <div>
-                          <span className="font-sans text-xs text-bone-dim uppercase tracking-widest">
-                            Starting at
-                          </span>
-                          <p
-                            className="font-display font-black text-flush leading-none mt-1"
-                            style={{
-                              fontSize: "clamp(2rem, 5vw, 2.8rem)",
-                              fontVariationSettings: '"wdth" 65',
-                            }}>
-                            <AnimatedPrice id={`${service.id}-${currency}`}>
-                              {formatPrice(service.startingAt)}
-                            </AnimatedPrice>
-                          </p>
-                        </div>
-
-                        {/* Title + blurb */}
-                        <div>
-                          <h3
-                            className="font-display text-bone text-2xl leading-tight mb-2"
-                            style={{ fontVariationSettings: '"wdth" 65' }}>
-                            {service.title}
-                          </h3>
-                          <p className="font-sans text-sm text-bone-dim leading-relaxed">
-                            {service.blurb}
-                          </p>
-                        </div>
-
-                        {/* Highlights */}
-                        <ul className="space-y-2.5 flex-1">
-                          {service.highlights.map((h) => (
-                            <CheckItem key={h} text={h} />
-                          ))}
-                        </ul>
-
-                        {/* CTA */}
-                        <div className="pt-2">
-                          <Button
-                            variant="primary"
-                            size="md"
-                            href={`/contact?service=${service.id}`}>
-                            Get a quote
-                          </Button>
-                        </div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── RETAINERS ──────────────────────────────────────────────────── */}
-      <section className="py-14 md:py-20 border-t border-hairline">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <SectionHeading
-              eyebrow="✦ Ongoing support"
-              title="Monthly Retainers"
-              align="left"
-            />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="mt-4 mb-12 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
-              Lock in a predictable monthly engagement — no ad-hoc hourly
-              surprises, just consistent progress.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:items-stretch">
-            {retainers.map((plan, i) => (
-              <Reveal key={plan.id} delay={i * 0.1} className="h-full">
+            {tiers.map((tier, i) => (
+              <Reveal key={tier.name} delay={i * 0.1} className="h-full">
                 <motion.div
                   whileHover={
-                    plan.featured
+                    tier.isPopular
                       ? { y: -6, boxShadow: "0 24px 60px rgba(0,0,0,0.6)" }
                       : undefined
                   }
                   transition={{ type: "spring", stiffness: 300, damping: 24 }}
                   className={
-                    plan.featured
+                    tier.isPopular
                       ? "h-full rounded-2xl ring-1 ring-flush/40 shadow-[0_0_40px_rgba(255,31,143,0.12)]"
                       : "h-full"
                   }>
-                  <Card noHover={plan.featured} className="h-full">
+                  <Card noHover={tier.isPopular} className="h-full">
                     <div className="p-6 flex flex-col gap-5 h-full">
-                      {/* Featured badge */}
-                      {plan.featured && (
+                      {tier.isPopular && (
                         <Pill className="self-start bg-flush/10 border-flush/30 text-flush">
                           Most popular
                         </Pill>
                       )}
 
-                      {/* Title + tagline */}
                       <div>
-                        <h3
-                          className="font-display text-bone text-2xl leading-tight"
-                          style={{ fontVariationSettings: '"wdth" 65' }}>
-                          {plan.title}
-                        </h3>
-                        <p className="mt-1.5 font-sans text-sm text-bone-dim leading-relaxed">
-                          {plan.tagline}
+                        <span className="font-sans text-xs text-bone-dim uppercase tracking-widest">
+                          {tier.priceLabel}
+                        </span>
+                        <p
+                          className="font-display font-black text-flush leading-none mt-1"
+                          style={{
+                            fontSize: "clamp(2rem, 5vw, 2.8rem)",
+                            fontVariationSettings: '"wdth" 65',
+                          }}>
+                          {formatPrice(tier.price, locale, currency, symbol)}
                         </p>
                       </div>
 
-                      {/* Price */}
-                      <p
-                        className="font-display font-black text-flush leading-none"
-                        style={{
-                          fontSize: "clamp(1.8rem, 4vw, 2.4rem)",
-                          fontVariationSettings: '"wdth" 65',
-                        }}>
-                        <AnimatedPrice id={`${plan.id}-${currency}`}>
-                          {formatPrice(plan.priceUsd) + '/mo'}
-                        </AnimatedPrice>
-                      </p>
+                      <div>
+                        <h3
+                          className="font-display text-bone text-2xl leading-tight mb-2"
+                          style={{ fontVariationSettings: '"wdth" 65' }}>
+                          {tier.name}
+                        </h3>
+                        <p className="font-sans text-sm text-bone-dim leading-relaxed">
+                          {tier.description}
+                        </p>
+                      </div>
 
-                      {/* Includes */}
                       <ul className="space-y-2.5 flex-1">
-                        {plan.includes.map((item) => (
-                          <CheckItem key={item} text={item} />
+                        {tier.features.map((f) => (
+                          <CheckItem key={f} text={f} />
                         ))}
                       </ul>
 
-                      {/* CTA */}
                       <div className="pt-2">
                         <Button
-                          variant={plan.featured ? "primary" : "glass"}
+                          variant="primary"
                           size="md"
-                          href={`/contact?retainer=${plan.id}`}>
-                          Get started
+                          href={
+                            tier.cta === "Let's talk"
+                              ? "/contact?type=custom"
+                              : `/contact?service=${encodeURIComponent(
+                                  tier.name.toLowerCase().replace(/\s+/g, "-")
+                                )}`
+                          }>
+                          {tier.cta}
                         </Button>
                       </div>
                     </div>
@@ -306,6 +152,30 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.3}>
+            <p className="mt-8 font-sans text-xs text-bone-dim/60 text-center">
+              Prices shown in your local currency, calibrated for your market.
+              Final quotes confirmed after a short discovery call.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── ONGOING SUPPORT ────────────────────────────────────────────── */}
+      <section className="py-14 md:py-20 border-t border-hairline">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal>
+            <p className="font-sans font-semibold text-lg text-bone">
+              Need ongoing support after launch?
+            </p>
+            <p className="mt-3 font-sans text-base text-bone-dim leading-relaxed max-w-2xl">
+              Every project includes a 14-day bug-fix warranty. For longer-term
+              care — updates, content changes, performance monitoring — I offer
+              monthly retainers, discussed once we&rsquo;ve shipped your project
+              together.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -321,7 +191,7 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
           </Reveal>
           <Reveal delay={0.08}>
             <p className="mt-4 mb-12 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
-              Need something extra? Layer these onto any project or retainer.
+              Need something extra? Layer these onto any project.
             </p>
           </Reveal>
 
@@ -459,15 +329,6 @@ export default function PricingContent({ detectedCurrency, fxRates }: Props) {
           </Reveal>
         </div>
       </section>
-
-      {/* FX disclaimer */}
-      <div className="pb-8">
-        <p className="text-xs text-bone-dim/50 text-center px-6">
-          Prices auto-converted from USD at today&rsquo;s rate
-          {fxRates.fetchedAt !== 'fallback' && ` (${fxRates.fetchedAt})`}.
-          Final invoice issued in your selected currency.
-        </p>
-      </div>
 
       <ContactCTA />
     </div>

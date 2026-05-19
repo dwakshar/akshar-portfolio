@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import MotionProvider from "@/components/providers/MotionProvider";
 import PageTransition from "@/components/providers/PageTransition";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import { TawkChat } from "@/components/chat/TawkChat";
 import Cursor from "@/components/ui/Cursor";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
@@ -88,6 +89,7 @@ export default function RootLayout({
             <Footer />
           </SmoothScroll>
         </MotionProvider>
+        <TawkChat />
       </body>
     </html>
   );

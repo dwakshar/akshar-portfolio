@@ -45,17 +45,11 @@ export default function PricingLoading() {
       {/* Hero */}
       <section className="pt-20 pb-16 md:pt-28 md:pb-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-            <div className="flex-1 flex flex-col gap-4">
-              <Skeleton className="h-4 w-20" />
-              <Skeleton className="h-20 w-3/4" />
-              <Skeleton className="h-5 w-full max-w-xl" />
-              <Skeleton className="h-5 w-2/3 max-w-xl" />
-              {/* Mobile currency dropdown */}
-              <Skeleton className="md:hidden h-10 w-36 rounded-full mt-1" />
-            </div>
-            {/* Desktop currency dropdown */}
-            <Skeleton className="hidden md:block h-10 w-36 rounded-full mt-10" />
+          <div className="flex flex-col gap-4">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-20 w-3/4" />
+            <Skeleton className="h-5 w-full max-w-xl" />
+            <Skeleton className="h-5 w-2/3 max-w-xl" />
           </div>
         </div>
       </section>
@@ -73,22 +67,16 @@ export default function PricingLoading() {
               <CardSkeleton key={i} />
             ))}
           </div>
+          <Skeleton className="h-4 w-96 mx-auto mt-8" />
         </div>
       </section>
 
-      {/* Retainers */}
+      {/* Ongoing Support */}
       <section className="py-14 md:py-20 border-t border-hairline">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col gap-3 mb-4">
-            <Skeleton className="h-3 w-36" />
-            <Skeleton className="h-9 w-52" />
-          </div>
-          <Skeleton className="h-5 w-full max-w-lg mb-12" />
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <CardSkeleton key={i} />
-            ))}
-          </div>
+        <div className="mx-auto max-w-6xl px-6 flex flex-col gap-3">
+          <Skeleton className="h-5 w-64" />
+          <Skeleton className="h-4 w-full max-w-2xl" />
+          <Skeleton className="h-4 w-3/4 max-w-2xl" />
         </div>
       </section>
 
