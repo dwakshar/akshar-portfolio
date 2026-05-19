@@ -78,11 +78,11 @@ export default function AboutPage() {
               </Reveal>
             </div>
 
-            {/* Right: photo — drop your photo at public/about-photo.jpg */}
+            {/* Right: photo — drop your photo at public/about-photo.webp */}
             <Reveal delay={0.1} className="order-first md:order-last">
               <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-hairline bg-ink-soft">
                 <Image
-                  src="/about-photo.jpg"
+                  src="/about-photo.webp"
                   alt="Akshar Sharma"
                   fill
                   sizes="(max-width: 768px) 90vw, 45vw"

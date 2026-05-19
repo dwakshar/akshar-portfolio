@@ -298,7 +298,7 @@ export default async function CaseStudyPage({ params }: Props) {
                       alt={`${project.title} — image ${i + 1}`}
                       fill
                       className="object-cover"
-                      sizes="480px"
+                      sizes="(max-width: 1024px) calc(50vw - 28px), 480px"
                     />
                   </div>
                 ))}

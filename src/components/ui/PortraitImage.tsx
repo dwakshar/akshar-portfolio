@@ -24,7 +24,7 @@ export default function PortraitImage({ name, className }: PortraitImageProps) {
 
   return (
     <Image
-      src="/portrait.png"
+      src="/portrait.webp"
       alt={name}
       width={0}
       height={0}

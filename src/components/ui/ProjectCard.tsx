@@ -77,7 +77,7 @@ export default function ProjectCard({ project }: Props) {
                 alt={project.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 560px"
                 onError={() => setImgError(true)}
               />
             </div>

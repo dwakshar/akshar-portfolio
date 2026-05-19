@@ -162,7 +162,7 @@ function Portrait({ className }: { className?: string }) {
     <div className={cn("relative", className)}>
       {!imgError && (
         <Image
-          src="/portrait.png"
+          src="/portrait.webp"
           alt={profile.name}
           width={0}
           height={0}
@@ -254,9 +254,9 @@ export default function Hero() {
       <motion.div
         className="absolute inset-0 z-0"
         style={eligible ? { x: bgX, y: bgY } : undefined}>
-        {/* Custom gradient image — replace /hero-gradient.png with your file */}
+        {/* Custom gradient image — replace /hero-gradient.webp with your file */}
         <Image
-          src="/hero-gradient.png"
+          src="/hero-gradient.webp"
           alt=""
           fill
           className="object-cover object-center md:object-top"
