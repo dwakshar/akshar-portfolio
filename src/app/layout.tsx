@@ -8,6 +8,7 @@ import Cursor from "@/components/ui/Cursor";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
+import { Suspense } from "react";
 import "./globals.css";
 
 const archivo = localFont({
@@ -89,7 +90,9 @@ export default function RootLayout({
             <Footer />
           </SmoothScroll>
         </MotionProvider>
-        <TawkChat />
+        <Suspense fallback={null}>
+          <TawkChat />
+        </Suspense>
       </body>
     </html>
   );

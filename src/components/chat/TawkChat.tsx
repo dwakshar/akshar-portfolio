@@ -41,6 +41,16 @@
  * BRANDING:
  * - "Powered by Tawk.to" remains visible (free tier requirement) — acceptable
  *
+ * CUSTOM FONT (Manrope):
+ * The widget runs in a sandboxed iframe — CSS cannot be injected from the page.
+ * Font must be set via the dashboard Custom CSS field:
+ *   Administration → Channels → Chat Widget → Widget Appearance → Advanced → Custom CSS
+ *
+ * Paste this exactly:
+ *
+ *   @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+ *   * { font-family: 'Manrope', sans-serif !important; }
+ *
  * INTEGRATIONS:
  * - No email forwarding setup needed initially — the dashboard + mobile app cover it
  * - Can add Slack/email forwarding later if conversations multiply
