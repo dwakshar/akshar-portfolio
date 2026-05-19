@@ -53,9 +53,9 @@ export default function PricingContent({ marketPricing }: Props) {
           <Reveal delay={0.1}>
             <p className="mt-5 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
               Every project starts with a discovery call so we can scope the
-              right fit — the starting prices below are a genuine baseline,
-              not a bait-and-switch. Pick a plan, add what you need, and
-              let&rsquo;s get moving.
+              right fit — the starting prices below are a genuine baseline, not
+              a bait-and-switch. Pick a plan, add what you need, and let&rsquo;s
+              get moving.
             </p>
           </Reveal>
         </div>
@@ -169,7 +169,7 @@ export default function PricingContent({ marketPricing }: Props) {
             <p className="font-sans font-semibold text-lg text-bone">
               Need ongoing support after launch?
             </p>
-            <p className="mt-3 font-sans text-base text-bone-dim leading-relaxed max-w-2xl">
+            <p className="mt-3 font-sans text-base text-bone-dim leading-relaxed max-w-full">
               Every project includes a 14-day bug-fix warranty. For longer-term
               care — updates, content changes, performance monitoring — I offer
               monthly retainers, discussed once we&rsquo;ve shipped your project
