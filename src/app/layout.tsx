@@ -3,12 +3,10 @@ import Navbar from "@/components/layout/Navbar";
 import MotionProvider from "@/components/providers/MotionProvider";
 import PageTransition from "@/components/providers/PageTransition";
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import { TawkChat } from "@/components/chat/TawkChat";
 import Cursor from "@/components/ui/Cursor";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
-import { Suspense } from "react";
 import "./globals.css";
 
 const archivo = localFont({
@@ -90,9 +88,6 @@ export default function RootLayout({
             <Footer />
           </SmoothScroll>
         </MotionProvider>
-        <Suspense fallback={null}>
-          <TawkChat />
-        </Suspense>
       </body>
     </html>
   );

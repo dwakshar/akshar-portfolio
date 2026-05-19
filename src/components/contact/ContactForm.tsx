@@ -327,10 +327,6 @@ export default function ContactForm() {
             <p className="font-sans text-bone-dim text-sm mt-2 leading-relaxed">
               Tell me about your project. I read everything.
             </p>
-            <p className="font-sans text-bone-dim text-xs mt-3 leading-relaxed border-t border-hairline pt-3">
-              Have a project in mind? Use this form — I&apos;ll reply by email within 24 hours.{" "}
-              <span className="text-bone">Quick question?</span> The chat bubble in the corner is faster.
-            </p>
           </div>
 
           <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
