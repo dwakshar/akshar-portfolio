@@ -13,19 +13,16 @@ export interface Intro {
 
 export const intro: Intro = {
   eyebrow: "About",
-  // Alternates (swap in Phase 11):
-  // "Design and code. One person, no handoff gaps."
-  // "Sites that sell, not just impress."
-  headline: "I build websites that earn their keep.",
-  lead: "I'm a freelance web designer and developer based in India, working with founders and marketing teams who need a website that actually moves the needle. My work sits at the intersection of visual craft and technical execution — I design in the browser, build for performance, and take full ownership from brief to launch.",
+  headline: "I build things people actually want to use.",
+  lead: "I'm a freelance mobile developer, UX/UI designer, and web developer based in India. I work with founders and product teams who need someone who can design and build — no handoffs, no gaps, no translating between disciplines. From mobile apps to web products, I take full ownership from brief to launch.",
 };
 
 // ─── Story ────────────────────────────────────────────────────────────────────
 
 export const story: string[] = [
-  "I got into web work the way most people do — by fixing things that were broken. Early on that meant hacking together WordPress themes for small businesses and wondering why the results never matched the mockup. That gap between design intent and browser reality is what pulled me deeper into code. Over the next few years I rebuilt my process from scratch: design and development as a single workflow, not two handoffs.",
-  "Today I work with a focused set of clients — mostly growing businesses, SaaS products, and agencies that need a reliable technical partner rather than a production line. Projects range from conversion-focused landing pages built in a week to full brand sites and web applications with CMS, performance budgets, and ongoing retainers. The common thread is that every client needs the work to do something specific, not just exist.",
-  "What I've found after six years is that the sites that actually perform share a few qualities: they're fast, they're clear about what they're offering, and every design decision traces back to a real user need. Good-looking is table stakes. The question I ask at the start of every project is: what does success look like three months after launch? That answer shapes everything — structure, copy, hierarchy, the whole thing.",
+  "I started out the way most developers do — fixing things that were broken. Early projects meant building websites for small businesses and running headfirst into the gap between a design file and a working product. That gap is what got me interested in design. Not aesthetics for its own sake, but the logic underneath it: why users click what they click, where they get confused, what makes an interface feel effortless versus frustrating.",
+  "Over the next few years I expanded from web into mobile. React Native changed what was possible for solo developers — suddenly you could ship a genuinely great app to both iOS and Android without a team. I rebuilt my process around it: design and development as one continuous workflow, with UX thinking woven in from the first conversation, not added at the end as a polish pass.",
+  "Today I work with a focused set of founders, product teams, and startups who need someone who can hold the whole thing. Projects range from mobile apps built from scratch to product redesigns where the underlying code is solid but the experience is letting users down. The question I start every project with is the same: what does success look like six months after launch? That answer shapes everything — architecture, flows, hierarchy, and where to spend time.",
 ];
 
 // ─── Principles ───────────────────────────────────────────────────────────────
@@ -39,15 +36,15 @@ export interface Principle {
 export const principles: Principle[] = [
   {
     id: "01",
-    title: "Outcomes over aesthetics",
+    title: "Mobile-first, always",
     description:
-      "A beautiful site that doesn't convert is an expensive brochure. Every visual choice I make has a job to do — hierarchy, clarity, trust-building, or all three.",
+      "Most users are on a phone. I design and build for that reality first, then scale up — not the other way around. Constraints make better products.",
   },
   {
     id: "02",
     title: "Design and code as one craft",
     description:
-      "I design and build myself, which means there's no handoff gap where intent gets lost. What you see in the mockup is what ships — no surprises, no dilution.",
+      "I design and build myself, which means there's no handoff gap where intent gets lost. What you see in the prototype is what ships — no surprises, no dilution.",
   },
   {
     id: "03",
@@ -59,7 +56,7 @@ export const principles: Principle[] = [
     id: "04",
     title: "Built to last, not just to launch",
     description:
-      "I write clean, documented code and hand over sites you can actually manage. Launch day is a milestone, not an ending — good work holds up long after the invoice is paid.",
+      "I write clean, documented code and hand over products you can actually maintain. Launch day is a milestone, not an ending — good work holds up long after the invoice is paid.",
   },
 ];
 
@@ -72,25 +69,20 @@ export interface ToolkitGroup {
 
 export const toolkit: ToolkitGroup[] = [
   {
-    category: "Design",
-    items: ["Figma", "Adobe Illustrator", "Framer", "Spline"],
+    category: "Mobile",
+    items: ["React Native", "Expo", "iOS & Android", "Reanimated", "Zustand"],
   },
   {
-    category: "Frontend",
+    category: "Design",
+    items: ["Figma", "Prototyping", "Design Systems", "Framer", "Spline"],
+  },
+  {
+    category: "Web",
     items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
   },
   {
     category: "Backend & Data",
-    items: ["Node.js", "Sanity CMS", "Contentful", "Supabase", "PostgreSQL"],
-  },
-  {
-    category: "Performance & SEO",
-    items: [
-      "Core Web Vitals",
-      "Lighthouse",
-      "Vercel Analytics",
-      "Technical SEO",
-    ],
+    items: ["Node.js", "Supabase", "PostgreSQL", "Sanity CMS", "REST & GraphQL"],
   },
 ];
 

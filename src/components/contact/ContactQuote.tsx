@@ -27,21 +27,17 @@ export default function ContactQuote() {
         <footer className="mt-5 flex items-center gap-3">
           {/* Avatar placeholder */}
           <div className="w-8 h-8 rounded-full bg-ink-soft border border-hairline shrink-0 overflow-hidden flex items-center justify-center">
-            <span className="font-sans text-xs text-bone-dim">PM</span>
+            <span className="font-sans text-xs text-bone-dim">AV</span>
           </div>
           <div className="flex flex-col">
             <span className="font-sans text-xs text-bone tracking-wide">
-              Priya Mehta
+              Amit Vats
             </span>
             <span className="font-sans text-[11px] text-bone-dim">
-              Founder · Lumen Studio
+              Founder · Mai Re
             </span>
           </div>
         </footer>
-
-        <p className="mt-4 font-sans text-[10px] text-bone-dim/40 uppercase tracking-widest">
-          Placeholder — swap in P11
-        </p>
       </div>
     </div>
   );

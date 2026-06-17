@@ -1,13 +1,13 @@
 export const profile = {
   name: "Akshar Sharma",
-  role: "Web Developer & UI/UX Designer",
-  bio: "I craft high-performance websites and digital experiences that drive real business results. With 6+ years of freelance expertise, I bridge the gap between beautiful design and robust development — every pixel purposeful, every interaction intentional. Whether you need a brand-new web presence or a conversion-focused redesign, I build it to perform.",
-  headline: "Websites that turn visitors into paying clients",
+  role: "Mobile Developer · UX/UI Designer · Web Developer",
+  bio: "I design and build mobile apps, digital products, and web experiences that people actually want to use. I work across the full stack — from user research and interface design to production-ready code. Mobile-first thinking, UX rigour, and clean development in every project.",
+  headline: "Apps and experiences built to be used, not just launched",
   stats: [
-    { value: "6+", label: "Years Experience" },
-    { value: "299+", label: "Deliveries" },
-    { value: "99%", label: "Positive Reviews" },
-    { value: "50+", label: "Happy Clients" },
+    { value: "24h", label: "Response Time" },
+    { value: "100%", label: "On-Time Delivery" },
+    { value: "Free", label: "Discovery Call" },
+    { value: "3", label: "Active Projects Max" },
   ],
-  trustLine: "Trusted by 200+ clients",
+  trustLine: "Small client list. Full attention on yours.",
 };

@@ -5,23 +5,23 @@ import Hero from "@/components/sections/Hero";
 import SelectedWork from "@/components/sections/SelectedWork";
 import ServicesAccordion from "@/components/sections/ServicesAccordion";
 import StatsMarquee from "@/components/sections/StatsMarquee";
-import Testimonials from "@/components/sections/Testimonials";
+import Commitments from "@/components/sections/Commitments";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Akshar Sharma · Freelance Web Developer & Designer",
+  title: "Akshar Sharma · Mobile Developer, UX/UI Designer & Web Developer",
   description:
-    "Freelance web designer & developer building high-performance, conversion-focused websites. 6+ years experience. One point of contact, fast turnaround, code that holds up.",
+    "Freelance mobile developer, UX/UI designer, and web developer based in India. I build apps and digital products that people actually want to use — one project at a time, with full attention.",
   openGraph: {
-    title: "Akshar Sharma · Freelance Web Developer & Designer",
+    title: "Akshar Sharma · Mobile Developer, UX/UI Designer & Web Developer",
     description:
-      "Freelance web designer & developer building high-performance, conversion-focused websites. 6+ years experience. Based in India, working globally.",
+      "Freelance mobile developer, UX/UI designer, and web developer based in India. Building apps and digital products with full attention on every project.",
     type: "website",
   },
   twitter: {
-    title: "Akshar Sharma · Freelance Web Developer & Designer",
+    title: "Akshar Sharma · Mobile Developer, UX/UI Designer & Web Developer",
     description:
-      "Freelance web designer & developer building high-performance, conversion-focused websites. 6+ years experience.",
+      "Freelance mobile developer, UX/UI designer, and web developer based in India. Building apps and digital products with full attention on every project.",
   },
 };
 
@@ -53,7 +53,7 @@ export default function Home() {
       <ClientsMarquee />
       <SelectedWork />
       <ServicesAccordion />
-      <Testimonials />
+      <Commitments />
       <ContactCTA />
     </>
   );

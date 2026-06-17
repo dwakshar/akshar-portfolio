@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { projects } from "@/data/projects";
 
-const featured = projects.filter((p) => p.featured);
+const featured = projects.filter((p) => p.featured).slice(0, 4);
 
 export default function SelectedWork() {
   return (
@@ -12,8 +12,8 @@ export default function SelectedWork() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="✦ Some Recent Projects"
-            title="Selected Work That Delivers"
+            eyebrow="✦ Work"
+            title="Work I'm Proud Of"
             action={
               <Button href="/work" variant="ghost">
                 See All Work

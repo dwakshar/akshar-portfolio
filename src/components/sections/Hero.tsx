@@ -65,61 +65,12 @@ function useParallaxEligible() {
 
 // ─── sub-components ───────────────────────────────────────────────────────────
 
-const AVATAR_COLORS = [
-  "radial-gradient(circle at 38% 32%, #ff6fb5ee, #ff1f8f55)",
-  "radial-gradient(circle at 38% 32%, #ff1f8fee, #a1116a55)",
-  "radial-gradient(circle at 38% 32%, #a1116aee, #640a3c55)",
-  "radial-gradient(circle at 38% 32%, #c8b8ffee, #8060e055)",
-  "radial-gradient(circle at 38% 32%, #d4d4d4ee, #88888855)",
-] as const;
-
-function AvatarStack() {
-  return (
-    <div className="flex items-center">
-      {AVATAR_COLORS.map((bg, i) => (
-        <span
-          key={i}
-          className="block w-7 h-7 rounded-full border-2 border-ink shrink-0"
-          style={{
-            background: bg,
-            marginLeft: i > 0 ? "-8px" : "0",
-            position: "relative",
-            zIndex: AVATAR_COLORS.length - i,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ArrowCircle() {
-  return (
-    <span
-      className="w-7 h-7 rounded-full border border-hairline bg-white/5 flex items-center justify-center shrink-0"
-      aria-hidden>
-      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-        <path
-          d="M1.5 6.5h10M8 3l3.5 3.5L8 10"
-          stroke="#a1a1a1"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
-  );
-}
-
 function TrustCard({ className }: { className?: string }) {
   return (
     <Card glass className={cn("p-5", className)}>
       <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-3">
-          <AvatarStack />
-          <ArrowCircle />
-        </div>
         <p className="font-sans text-xs text-bone-dim leading-relaxed">
-          99.6% of my clients are satisfied — be one of them today.
+          Early in my journey — every project gets my full attention, no distractions.
         </p>
         <div className="flex gap-1.5">
           <Pill className="whitespace-nowrap">Free Consultation</Pill>
@@ -401,15 +352,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ── 2. Avatar group pill ───────────────────────────────────────── */}
-        <motion.div
-          variants={prefersReducedMotion ? undefined : fadeUp}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-hairline bg-white/5">
-          <AvatarStack />
-          <ArrowCircle />
-        </motion.div>
-
-        {/* ── 3. Trust line ─────────────────────────────────────────────── */}
+        {/* ── 2. Trust line ─────────────────────────────────────────────── */}
         <motion.p
           variants={prefersReducedMotion ? undefined : fadeUp}
           className="font-sans text-xs text-bone-dim text-center">

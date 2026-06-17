@@ -21,35 +21,59 @@ export interface Testimonial {
 
 export const services: Service[] = [
   {
-    id: "web-design",
+    id: "mobile-development",
     number: "01",
-    title: "Web Design",
+    title: "Mobile Development",
     description:
-      "First impressions are everything online. I design visually stunning, strategically crafted interfaces that guide your visitors toward action — whether that's booking a call, making a purchase, or reaching out.",
+      "Most of the world lives on a phone. I build cross-platform mobile apps that feel native, perform fast, and ship to both iOS and Android — from a single, maintainable codebase without the usual trade-offs.",
     deliverables: [
-      "Custom UI/UX design",
-      "Mobile-first responsive layouts",
+      "React Native / Expo development",
+      "iOS & Android deployment",
+      "Offline support & local storage",
+      "Push notifications & deep linking",
+      "API & backend integrations",
+      "App Store & Play Store submission",
+    ],
+    tagline: "Native feel. Cross-platform efficiency.",
+    longDescription:
+      "Your users are on their phones — your product should be too. I build cross-platform mobile applications using React Native and Expo that look and behave like native apps on both iOS and Android. Smooth animations, responsive layouts, reliable offline behaviour, and clean architecture that your team can extend without starting over.",
+    outcomes: [
+      "A single codebase that ships to iOS and Android without compromise",
+      "App Store and Play Store ready, with all the compliance and submission handled",
+      "Performant animations and interactions that feel genuinely native",
+      "Architecture that scales as your feature set grows",
+    ],
+  },
+  {
+    id: "ux-ui-design",
+    number: "02",
+    title: "UX/UI Design",
+    description:
+      "Good design is invisible — users just find it easy. I research, map, and design interfaces for mobile apps and web products that reduce friction, build trust, and guide users toward the outcomes that matter.",
+    deliverables: [
+      "User research & journey mapping",
+      "Wireframes & information architecture",
+      "High-fidelity UI design (Figma)",
       "Interactive prototypes",
       "Design system & component library",
-      "Brand-aligned visual language",
-      "Conversion-optimised page flows",
+      "Handoff-ready specs & assets",
     ],
-    tagline: "Interfaces that convert.",
+    tagline: "Designed to be used, not just admired.",
     longDescription:
-      "Your website is your most powerful sales tool — if it's designed right. I create visually striking, strategically structured interfaces that communicate your value instantly and guide visitors toward the actions that matter most. Every layout, colour choice, and interaction is deliberate — nothing is decoration for decoration's sake.",
+      "The best interface is one users never have to think about. I start with research — understanding who your users are, what they're trying to do, and where existing products fail them. From there I design systems, not screens: consistent components, clear hierarchies, and interaction patterns that carry through every state and edge case.",
     outcomes: [
-      "A site that wins clients before they even make contact",
-      "Consistent brand experience across every device and screen size",
-      "Clear user journeys engineered to drive conversion",
-      "A design system your team can confidently build on",
+      "Interfaces users find intuitive on first open — no learning curve",
+      "A design system that keeps your product consistent as it scales",
+      "Prototypes you can test with real users before writing a line of code",
+      "Handoff documentation that cuts developer guesswork in half",
     ],
   },
   {
     id: "web-development",
-    number: "02",
+    number: "03",
     title: "Web Development",
     description:
-      "Beautiful design means nothing if it doesn't perform. I build fast, accessible, production-ready websites using modern frameworks — code that's clean, maintainable, and built to scale as your business grows.",
+      "Fast, accessible, and built to last. I develop web applications and sites using modern frameworks — clean code, sensible architecture, and enough performance obsession to make a difference in the real world.",
     deliverables: [
       "Next.js / React development",
       "CMS integration (Sanity, Contentful)",
@@ -60,84 +84,12 @@ export const services: Service[] = [
     ],
     tagline: "Fast, clean, built to last.",
     longDescription:
-      "Great design needs an equally great engine. I build production-ready sites with modern frameworks — clean code, smart architecture, and obsessive attention to performance. The result is a site that loads instantly, scales without drama, and won't need a ground-up rebuild every 18 months.",
+      "A well-built web product is invisible in the best way — it loads instantly, works on every device, and gives users no reason to leave. I build production-ready sites and web apps with Next.js and React: clean code, smart architecture, and performance baked in from the start, not bolted on at the end.",
     outcomes: [
-      "Sub-second load times that keep visitors engaged and bouncing less",
+      "Sub-second load times that keep users engaged and reduce bounce",
       "Code your future team can maintain and confidently extend",
-      "Seamless integrations with the tools you already rely on",
-      "An architecture that grows with your business without accumulating debt",
-    ],
-  },
-  {
-    id: "seo-performance",
-    number: "03",
-    title: "SEO & Performance",
-    description:
-      "A site no one can find is a site that doesn't work. I bake SEO best practices and performance budgets directly into the build — so your site ranks, loads instantly, and keeps visitors engaged long enough to convert.",
-    deliverables: [
-      "Technical SEO audit & fixes",
-      "Core Web Vitals optimisation",
-      "Structured data & schema markup",
-      "Lighthouse score 90+",
-      "Content & metadata strategy",
-      "Ongoing performance monitoring",
-    ],
-    tagline: "Found. Fast. First.",
-    longDescription:
-      "Rankings don't happen by accident — and bolting SEO on after launch is always more expensive than building it in. I weave technical SEO and performance directly into the build: structured data, semantic markup, Core Web Vitals, and page speed. Your site doesn't just look good; it performs where it counts.",
-    outcomes: [
-      "Higher organic rankings that reduce your dependence on paid ads",
-      "Faster load times that lower bounce rate and lift conversions",
-      "Search visibility that compounds month over month",
-      "Scores that impress both clients and search algorithms",
-    ],
-  },
-  {
-    id: "branding",
-    number: "04",
-    title: "Branding & Identity",
-    description:
-      "Your brand is more than a logo — it's the feeling people get every time they interact with your business. I craft cohesive visual identities that communicate your values instantly and make you unmistakable in your market.",
-    deliverables: [
-      "Logo design & variations",
-      "Colour & typography system",
-      "Brand guidelines document",
-      "Social media kit",
-      "Stationery & collateral design",
-      "Tone of voice guidelines",
-    ],
-    tagline: "Unmistakable from day one.",
-    longDescription:
-      "Your brand is the shortcut people take to decide if they trust you. I build cohesive visual identities — from logo to colour system to tone of voice — that instantly communicate your values and make you stand out in a crowded market. The kind of brand that makes people stop scrolling.",
-    outcomes: [
-      "A visual identity your audience recognises instantly across every touchpoint",
-      "Brand guidelines your team can follow without you in the room",
-      "Consistent presentation that builds trust and premium perception",
-      "A visual language that still feels right five years from now",
-    ],
-  },
-  {
-    id: "ongoing-support",
-    number: "05",
-    title: "Ongoing Support & Care",
-    description:
-      "Launching your site is just the beginning. With a care plan, I'm your dedicated technical partner — handling updates, monitoring performance, shipping new features, and keeping everything running at its best.",
-    deliverables: [
-      "Monthly content updates",
-      "Security patches & monitoring",
-      "Performance reviews & reporting",
-      "A/B testing & CRO tweaks",
-      "Priority support & fast response",
-      "Monthly analytics summary",
-    ],
-    tagline: "Your site, always at its best.",
-    longDescription:
-      "Launch day is just the beginning. As your dedicated technical partner on retainer, I handle everything from content updates and security patches to CRO experiments and new feature releases — so you can focus on running your business, not your website. Fast response, no support-ticket queues, no strangers touching your codebase.",
-    outcomes: [
-      "Zero downtime with proactive monitoring and rapid incident response",
-      "Regular improvements shipped without a full project cycle",
-      "Performance data that informs real business decisions",
-      "A technical partner who knows your site inside out — from day one",
+      "Seamless integrations with the tools and APIs you already rely on",
+      "An architecture that grows with your product without accumulating debt",
     ],
   },
 ];

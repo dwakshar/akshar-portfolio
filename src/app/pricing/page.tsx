@@ -6,19 +6,19 @@ import PricingContent from "@/components/pricing/PricingContent";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent starting prices for landing pages, business websites, and custom builds. Every project begins with a free discovery call.",
+    "Transparent starting prices for mobile apps, UX/UI design, and web development. Every project begins with a discovery call.",
   alternates: { canonical: "https://aksharsharma.com/pricing" },
   openGraph: {
     title: "Pricing — Akshar Sharma",
     description:
-      "Transparent starting prices for landing pages, business websites, and custom builds.",
+      "Transparent starting prices for mobile apps, UX/UI design, and web development.",
     url: "https://aksharsharma.com/pricing",
     type: "website",
   },
   twitter: {
     title: "Pricing — Akshar Sharma",
     description:
-      "Transparent starting prices for landing pages, business websites, and custom builds.",
+      "Transparent starting prices for mobile apps, UX/UI design, and web development.",
   },
 };
 

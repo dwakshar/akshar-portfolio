@@ -6,7 +6,7 @@ import Card from "@/components/ui/Card";
 import Pill from "@/components/ui/Pill";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { addOns, customQuoteCategories, paymentModel } from "@/data/pricing";
+import { addOns, paymentModel } from "@/data/pricing";
 import type { MarketPricing } from "@/lib/data/pricing";
 import { formatPrice } from "@/lib/pricing/format-price";
 import { motion } from "framer-motion";
@@ -28,7 +28,7 @@ function CheckItem({ text }: { text: string }) {
 }
 
 export default function PricingContent({ marketPricing }: Props) {
-  const { currency, symbol, locale, tiers } = marketPricing;
+  const { currency, symbol, locale, services } = marketPricing;
 
   return (
     <div className="min-h-[100dvh] bg-ink">
@@ -54,113 +54,137 @@ export default function PricingContent({ marketPricing }: Props) {
             <p className="mt-5 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
               Every project starts with a discovery call so we can scope the
               right fit — the starting prices below are a genuine baseline, not
-              a bait-and-switch. Pick a plan, add what you need, and let&rsquo;s
+              a bait-and-switch. Pick a service, add what you need, and let&rsquo;s
               get moving.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ── ANCHOR PRICING ─────────────────────────────────────────────── */}
-      <section className="py-14 md:py-20 border-t border-hairline">
+      {/* ── NO BARGAIN NOTICE ──────────────────────────────────────────── */}
+      <section className="py-6 border-t border-hairline bg-flush/5">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <SectionHeading
-              eyebrow="✦ Project work"
-              title="Starting Prices"
-              align="left"
-            />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="mt-4 mb-12 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
-              Fixed-scope deliverables priced from a solid baseline. Final quote
-              confirmed after our discovery call.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:items-stretch">
-            {tiers.map((tier, i) => (
-              <Reveal key={tier.name} delay={i * 0.1} className="h-full">
-                <motion.div
-                  whileHover={
-                    tier.isPopular
-                      ? { y: -6, boxShadow: "0 24px 60px rgba(0,0,0,0.6)" }
-                      : undefined
-                  }
-                  transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                  className={
-                    tier.isPopular
-                      ? "h-full rounded-2xl ring-1 ring-flush/40 shadow-[0_0_40px_rgba(255,31,143,0.12)]"
-                      : "h-full"
-                  }>
-                  <Card noHover={tier.isPopular} className="h-full">
-                    <div className="p-6 flex flex-col gap-5 h-full">
-                      {tier.isPopular && (
-                        <Pill className="self-start bg-flush/10 border-flush/30 text-flush">
-                          Most popular
-                        </Pill>
-                      )}
-
-                      <div>
-                        <span className="font-sans text-xs text-bone-dim uppercase tracking-widest">
-                          {tier.priceLabel}
-                        </span>
-                        <p
-                          className="font-display font-black text-flush leading-none mt-1"
-                          style={{
-                            fontSize: "clamp(2rem, 5vw, 2.8rem)",
-                            fontVariationSettings: '"wdth" 65',
-                          }}>
-                          {formatPrice(tier.price, locale, currency, symbol)}
-                        </p>
-                      </div>
-
-                      <div>
-                        <h3
-                          className="font-display text-bone text-2xl leading-tight mb-2"
-                          style={{ fontVariationSettings: '"wdth" 65' }}>
-                          {tier.name}
-                        </h3>
-                        <p className="font-sans text-sm text-bone-dim leading-relaxed">
-                          {tier.description}
-                        </p>
-                      </div>
-
-                      <ul className="space-y-2.5 flex-1">
-                        {tier.features.map((f) => (
-                          <CheckItem key={f} text={f} />
-                        ))}
-                      </ul>
-
-                      <div className="pt-2">
-                        <Button
-                          variant="primary"
-                          size="md"
-                          href={
-                            tier.cta === "Let's talk"
-                              ? "/contact?type=custom"
-                              : `/contact?service=${encodeURIComponent(
-                                  tier.name.toLowerCase().replace(/\s+/g, "-")
-                                )}`
-                          }>
-                          {tier.cta}
-                        </Button>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.3}>
-            <p className="mt-8 font-sans text-xs text-bone-dim/60 text-center">
-              Prices shown in your local currency, calibrated for your market.
-              Final quotes confirmed after a short discovery call.
-            </p>
+            <div className="flex items-start gap-4 p-5 rounded-2xl border border-flush/30 bg-flush/8">
+              <span className="text-flush text-lg shrink-0 mt-0.5">⚠</span>
+              <div>
+                <p className="font-sans font-semibold text-sm text-bone">
+                  These prices are fixed. There is no negotiation.
+                </p>
+                <p className="mt-1 font-sans text-sm text-bone-dim leading-relaxed">
+                  Every figure here reflects the real value of the work — not a
+                  starting point for back-and-forth. If the price doesn&rsquo;t
+                  fit your budget, I&rsquo;m happy to scope a smaller deliverable
+                  that does. But the rate itself does not move. Please factor
+                  this in before reaching out.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
+
+      {/* ── SERVICE PRICING ────────────────────────────────────────────── */}
+      {services.map((service, si) => (
+        <section key={service.id} className="py-14 md:py-20 border-t border-hairline">
+          <div className="mx-auto max-w-6xl px-6">
+            <Reveal>
+              <SectionHeading
+                eyebrow={`✦ 0${si + 1}`}
+                title={service.name}
+                align="left"
+              />
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p className="mt-4 mb-12 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
+                {service.description}
+              </p>
+            </Reveal>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:items-stretch">
+              {service.tiers.map((tier, i) => (
+                <Reveal key={tier.name} delay={i * 0.1} className="h-full">
+                  <motion.div
+                    whileHover={
+                      tier.isPopular
+                        ? { y: -6, boxShadow: "0 24px 60px rgba(0,0,0,0.6)" }
+                        : undefined
+                    }
+                    transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                    className={
+                      tier.isPopular
+                        ? "h-full rounded-2xl ring-1 ring-flush/40 shadow-[0_0_40px_rgba(255,31,143,0.12)]"
+                        : "h-full"
+                    }>
+                    <Card noHover={tier.isPopular} className="h-full">
+                      <div className="p-6 flex flex-col gap-5 h-full">
+                        {tier.isPopular && (
+                          <Pill className="self-start bg-flush/10 border-flush/30 text-flush">
+                            Most popular
+                          </Pill>
+                        )}
+
+                        <div>
+                          <span className="font-sans text-xs text-bone-dim uppercase tracking-widest">
+                            {tier.priceLabel}
+                          </span>
+                          <p
+                            className="font-display font-black text-flush leading-none mt-1"
+                            style={{
+                              fontSize: "clamp(2rem, 5vw, 2.8rem)",
+                              fontVariationSettings: '"wdth" 65',
+                            }}>
+                            {formatPrice(tier.price, locale, currency, symbol)}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h3
+                            className="font-display text-bone text-2xl leading-tight mb-2"
+                            style={{ fontVariationSettings: '"wdth" 65' }}>
+                            {tier.name}
+                          </h3>
+                          <p className="font-sans text-sm text-bone-dim leading-relaxed">
+                            {tier.description}
+                          </p>
+                        </div>
+
+                        <ul className="space-y-2.5 flex-1">
+                          {tier.features.map((f) => (
+                            <CheckItem key={f} text={f} />
+                          ))}
+                        </ul>
+
+                        <div className="pt-2">
+                          <Button
+                            variant="primary"
+                            size="md"
+                            href={
+                              tier.cta === "Let's talk"
+                                ? "/contact?type=custom"
+                                : `/contact?service=${encodeURIComponent(
+                                    tier.name.toLowerCase().replace(/\s+/g, "-")
+                                  )}`
+                            }>
+                            {tier.cta}
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+                  </motion.div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.3}>
+              <p className="mt-8 font-sans text-xs text-bone-dim/60 text-center">
+                Prices shown in your local currency, calibrated for your market.
+                Final quotes confirmed after a short discovery call.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+      ))}
 
       {/* ── ONGOING SUPPORT ────────────────────────────────────────────── */}
       <section className="py-14 md:py-20 border-t border-hairline">
@@ -232,71 +256,67 @@ export default function PricingContent({ marketPricing }: Props) {
               align="center"
             />
           </Reveal>
+          <Reveal delay={0.06}>
+            <p className="mt-4 mb-12 font-sans text-base text-bone-dim leading-relaxed text-center max-w-xl mx-auto">
+              Three simple payments tied to real milestones — you always know
+              exactly what you&rsquo;re paying for and when.
+            </p>
+          </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="mt-14 grid grid-cols-1 gap-px border border-hairline rounded-2xl overflow-hidden md:grid-cols-3">
-              {paymentModel.steps.map((step, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center justify-center text-center px-6 py-8 bg-ink-soft">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {paymentModel.steps.map((step, i) => (
+              <Reveal key={i} delay={i * 0.1}>
+                <div className="relative flex flex-col gap-4 p-6 rounded-2xl border border-hairline bg-ink-soft h-full">
+                  {/* Step number */}
+                  <span className="font-sans text-xs font-semibold text-bone-dim/50 uppercase tracking-widest">
+                    Step {i + 1} of 3
+                  </span>
+
+                  {/* Percentage */}
                   <span
-                    className="font-display font-black text-flush"
+                    className="font-display font-black text-flush leading-none"
                     style={{
-                      fontSize: "clamp(2.4rem, 5vw, 3.5rem)",
+                      fontSize: "clamp(2.8rem, 5vw, 3.8rem)",
                       fontVariationSettings: '"wdth" 65',
                     }}>
                     {step.label}
                   </span>
-                  <p className="mt-2 font-sans text-sm text-bone-dim leading-relaxed max-w-[22ch]">
+
+                  {/* Title + when */}
+                  <div>
+                    <h3 className="font-sans font-semibold text-base text-bone">
+                      {step.title}
+                    </h3>
+                    <p className="mt-0.5 font-sans text-xs font-medium text-flush/80 uppercase tracking-wide">
+                      {step.when}
+                    </p>
+                  </div>
+
+                  {/* Detail */}
+                  <p className="font-sans text-sm text-bone-dim leading-relaxed flex-1">
                     {step.detail}
                   </p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* ── CUSTOM QUOTE ───────────────────────────────────────────────── */}
-      <section className="py-14 md:py-20 border-t border-hairline">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <SectionHeading
-              eyebrow="✦ Bigger projects"
-              title="Custom Quote"
-              align="left"
-            />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="mt-4 mb-12 font-sans text-base md:text-lg text-bone-dim leading-relaxed max-w-full">
-              For mobile apps, full-stack platforms, and bespoke brand systems —
-              every engagement is scoped from scratch. Let&rsquo;s talk.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {customQuoteCategories.map((cat, i) => (
-              <Reveal key={cat.id} delay={i * 0.08}>
-                <div className="group flex flex-col gap-3 p-6 rounded-2xl border border-hairline bg-ink-soft hover:border-bone/10 transition-colors duration-200">
-                  <h3
-                    className="font-display text-xl text-bone"
-                    style={{ fontVariationSettings: '"wdth" 65' }}>
-                    {cat.title}
-                  </h3>
-                  <p className="font-sans text-sm text-bone-dim leading-relaxed flex-1">
-                    {cat.blurb}
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    href="/contact?type=custom"
-                    className="self-start">
-                    Get a custom quote
-                  </Button>
+                  {/* Non-refundable badge */}
+                  {step.isNonRefundable && (
+                    <div className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/8">
+                      <span className="text-amber-400 text-xs">⚠</span>
+                      <span className="font-sans text-xs font-semibold text-amber-400">
+                        Non-refundable
+                      </span>
+                    </div>
+                  )}
                 </div>
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.35}>
+            <p className="mt-8 font-sans text-xs text-bone-dim/50 text-center">
+              Invoices are sent via email. Accepted: bank transfer, UPI, Wise,
+              PayPal, or Stripe — we&rsquo;ll confirm at kickoff.
+            </p>
+          </Reveal>
         </div>
       </section>
 

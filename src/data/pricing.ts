@@ -3,15 +3,12 @@ export interface AddOn {
   description: string;
 }
 
-export interface CustomQuoteCategory {
-  id: string;
-  title: string;
-  blurb: string;
-}
-
 export interface PaymentStep {
   label: string;
+  title: string;
+  when: string;
   detail: string;
+  isNonRefundable?: boolean;
 }
 
 export interface PaymentModel {
@@ -21,14 +18,19 @@ export interface PaymentModel {
 
 export const addOns: AddOn[] = [
   {
-    name: "UI/UX Design (Figma)",
+    name: "App Store Optimisation (ASO)",
     description:
-      "Full design system and wireframes reviewed and approved before a single line of code.",
+      "Keyword research, metadata, screenshots, and preview video to maximise organic installs from day one.",
+  },
+  {
+    name: "User Testing & Research",
+    description:
+      "Structured usability sessions with real users — insights that inform design decisions before a single pixel ships.",
   },
   {
     name: "GSAP / Framer Animations",
     description:
-      "Scroll-triggered, physics-based, or cinematic motion tailored to your brand personality.",
+      "Scroll-triggered, physics-based, or cinematic motion tailored to your product's personality.",
   },
   {
     name: "Motion & Video Integration",
@@ -41,9 +43,9 @@ export const addOns: AddOn[] = [
       "A structured content system so your team can publish and edit without touching code.",
   },
   {
-    name: "Technical SEO",
+    name: "Accessibility Audit",
     description:
-      "Site structure, metadata, schema markup, and Core Web Vitals optimisation done properly.",
+      "WCAG compliance review with annotated fixes — covering colour contrast, touch targets, screen reader support, and keyboard navigation.",
   },
   {
     name: "Copywriting & Storytelling",
@@ -55,38 +57,6 @@ export const addOns: AddOn[] = [
     description:
       "GA4, GTM, conversion events, and custom dashboards configured correctly from day one.",
   },
-  {
-    name: "Hosting & Deployment",
-    description:
-      "Managed deployment to Vercel or Cloudflare with CI/CD pipeline and custom domain setup.",
-  },
-];
-
-export const customQuoteCategories: CustomQuoteCategory[] = [
-  {
-    id: "mobile",
-    title: "Mobile Apps",
-    blurb:
-      "Native iOS & Android, or cross-platform React Native — scoped from discovery through to App Store delivery.",
-  },
-  {
-    id: "fullstack",
-    title: "Full-Stack Web Applications",
-    blurb:
-      "Complex platforms with authentication, databases, and business logic architected to scale with your growth.",
-  },
-  {
-    id: "brand",
-    title: "Bespoke Brand Systems",
-    blurb:
-      "End-to-end identity work — brand strategy, visual system, and full digital application across every touchpoint.",
-  },
-  {
-    id: "enterprise",
-    title: "Enterprise SaaS Platforms",
-    blurb:
-      "Large-scale B2B products with teams, permissions, dashboards, and third-party integrations built for reliability.",
-  },
 ];
 
 export const paymentModel: PaymentModel = {
@@ -94,15 +64,25 @@ export const paymentModel: PaymentModel = {
   steps: [
     {
       label: "40%",
-      detail: "Kickoff deposit — non-refundable, secures your project slot",
+      title: "Kickoff Deposit",
+      when: "Before work begins",
+      detail:
+        "Paid upfront to confirm the project and secure your slot in my schedule. This is non-refundable — it locks in dedicated time on both sides and means I turn away other work for you.",
+      isNonRefundable: true,
     },
     {
       label: "30%",
-      detail: "Midway milestone, paid when design or staging is approved",
+      title: "Midway Milestone",
+      when: "When design or staging is approved",
+      detail:
+        "Due once you've reviewed real progress — a design approval, a working staging build, or an agreed milestone. You've seen the work and shaped it before this payment is due.",
     },
     {
       label: "30%",
-      detail: "Final delivery — paid before handoff and launch",
+      title: "Final Delivery",
+      when: "Before handoff & launch",
+      detail:
+        "Cleared before I hand over all files, credentials, and push anything live. Nothing ships until the final payment is confirmed — clean and simple for both of us.",
     },
   ],
 };

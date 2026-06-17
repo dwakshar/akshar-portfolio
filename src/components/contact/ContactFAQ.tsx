@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     q: "What's your typical project timeline?",
-    a: "Landing pages: 1–2 weeks. Full sites: 3–6 weeks. Depends on scope and your responsiveness with feedback.",
+    a: "Mobile: 6–14 weeks. UX/UI: 1–5 weeks. Web: 1–5 weeks. Faster when feedback is quick.",
   },
   {
     q: "Do you work with international clients?",

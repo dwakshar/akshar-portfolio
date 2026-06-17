@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import Pill from "@/components/ui/Pill";
 import Reveal from "@/components/ui/Reveal";
 import { projects } from "@/data/projects";
-import { ArrowLeft, ArrowRight, ExternalLink, GitBranch } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -110,26 +110,17 @@ export default async function CaseStudyPage({ params }: Props) {
             </p>
 
             {/* CTA buttons */}
-            <div className="flex items-center gap-3 flex-wrap pt-1">
-              {project.liveUrl && (
+            {project.liveUrl && (
+              <div className="flex items-center gap-3 flex-wrap pt-1">
                 <Button
                   href={project.liveUrl}
                   variant="primary"
                   size="md"
                   icon={<ExternalLink className="w-4 h-4" />}>
-                  Visit live site
+                  Visit Live
                 </Button>
-              )}
-              {project.repoUrl && (
-                <Button
-                  href={project.repoUrl}
-                  variant="ghost"
-                  size="md"
-                  icon={<GitBranch className="w-4 h-4" />}>
-                  View on GitHub
-                </Button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </Reveal>
 
