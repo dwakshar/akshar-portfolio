@@ -150,7 +150,7 @@ export const projects: Project[] = [
     liveUrl: null,
     status: "open-source",
     featured: true,
-    cover: "/work/defendra/cover.webp",
+    cover: "/work/defendra/cover.png",
     thumbnails: [
       "/work/defendra/hero.webp",
       "/work/defendra/verdict.webp",
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     liveUrl: null,
     status: "live",
     featured: true,
-    cover: "/work/dawnwell/cover.webp",
+    cover: "/work/dawnwell/cover.png",
     thumbnails: [
       "/work/dawnwell/hero.webp",
       "/work/dawnwell/checkin.webp",
