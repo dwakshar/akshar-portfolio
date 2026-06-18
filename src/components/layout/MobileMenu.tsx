@@ -2,6 +2,7 @@
 
 import Button from "@/components/ui/Button";
 import { navLinks } from "@/lib/nav";
+import { Download } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -134,9 +135,19 @@ export default function MobileMenu({
               ease: [0.22, 1, 0.36, 1],
             }}
             className="p-6 pb-10">
-            <Button href="/contact" size="lg" className="w-full justify-center">
-              Start a Project
-            </Button>
+            <div className="flex flex-col gap-3">
+              <Button href="/contact" size="lg" className="w-full justify-center">
+                Start a Project
+              </Button>
+              <Button
+                href="https://drive.google.com/file/d/15PohY4regGHHzk6oYah26lx03B11Mwt_/view?usp=sharing"
+                variant="glass"
+                size="lg"
+                icon={<Download className="w-4 h-4" />}
+                className="w-full justify-center">
+                Download CV
+              </Button>
+            </div>
           </motion.div>
         </motion.div>
       )}

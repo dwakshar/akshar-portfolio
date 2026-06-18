@@ -10,7 +10,7 @@ const commitments = [
     body: "I keep my client list intentionally small. When you're working with me, you're not competing with ten other projects for my focus — your work gets all of it.",
   },
   {
-    icon: "⚡",
+    icon: "⚡\uFE0E",
     title: "Response within 24 hours",
     body: "No radio silence, no chasing me down. Every message gets a reply within a business day — often much faster. You'll always know where things stand.",
   },
