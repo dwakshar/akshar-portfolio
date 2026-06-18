@@ -3,6 +3,7 @@
 import Button from "@/components/ui/Button";
 import { navLinks } from "@/lib/nav";
 import { motion } from "framer-motion";
+import { Download } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -31,17 +32,17 @@ export default function Navbar() {
             ? "bg-ink/80 backdrop-blur-xl border-b border-hairline"
             : "bg-transparent"
         }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Brand */}
+        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative flex items-center h-16">
+            {/* Brand — left */}
             <Link
               href="/"
-              className="font-display font-medium text-2xl uppercase tracking-tight text-bone">
+              className="font-display font-medium text-2xl uppercase tracking-tight text-bone shrink-0">
               AKSHAR SHARMA
             </Link>
 
-            {/* Center nav — desktop only */}
-            <nav className="hidden lg:flex items-center bg-white/5 backdrop-blur-md border border-hairline rounded-pill px-1 py-1 gap-0.5">
+            {/* Nav pill — absolutely pinned to exact center, desktop only */}
+            <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center bg-white/5 backdrop-blur-md border border-hairline rounded-pill px-1 py-1 gap-0.5">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -70,49 +71,59 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Right CTA — desktop only */}
-            <div className="hidden lg:flex items-center">
-              <Button href="/contact" size="sm">
-                Start a Project
-              </Button>
-            </div>
+            {/* Right side — ml-auto pushes to edge */}
+            <div className="ml-auto flex items-center gap-2">
+              {/* Desktop CTAs */}
+              <div className="hidden lg:flex items-center gap-2">
+                <Button
+                  href="https://drive.google.com/file/d/15PohY4regGHHzk6oYah26lx03B11Mwt_/view?usp=sharing"
+                  variant="glass"
+                  size="sm"
+                  icon={<Download className="w-3 h-3" />}>
+                  Download CV
+                </Button>
+                <Button href="/contact" size="sm">
+                  Start a Project
+                </Button>
+              </div>
 
-            {/* Hamburger — mobile only */}
-            <motion.button
-              ref={hamburgerRef}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setMobileOpen((v) => !v)}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-menu"
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-md border border-hairline text-bone"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}>
-              <span className="relative flex flex-col justify-center items-center w-5 h-5">
-                <span
-                  className="absolute block h-[1.5px] w-5 bg-current rounded-full transition-all duration-300 ease-in-out"
-                  style={{
-                    transform: mobileOpen
-                      ? "rotate(45deg)"
-                      : "translateY(-5px)",
-                  }}
-                />
-                <span
-                  className="absolute block h-[1.5px] w-5 bg-current rounded-full transition-all duration-300 ease-in-out"
-                  style={{
-                    opacity: mobileOpen ? 0 : 1,
-                    transform: mobileOpen ? "scaleX(0)" : "scaleX(1)",
-                  }}
-                />
-                <span
-                  className="absolute block h-[1.5px] w-5 bg-current rounded-full transition-all duration-300 ease-in-out"
-                  style={{
-                    transform: mobileOpen
-                      ? "rotate(-45deg)"
-                      : "translateY(5px)",
-                  }}
-                />
-              </span>
-            </motion.button>
+              {/* Hamburger — mobile only */}
+              <motion.button
+                ref={hamburgerRef}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setMobileOpen((v) => !v)}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-menu"
+                className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-md border border-hairline text-bone"
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}>
+                <span className="relative flex flex-col justify-center items-center w-5 h-5">
+                  <span
+                    className="absolute block h-[1.5px] w-5 bg-current rounded-full transition-all duration-300 ease-in-out"
+                    style={{
+                      transform: mobileOpen
+                        ? "rotate(45deg)"
+                        : "translateY(-5px)",
+                    }}
+                  />
+                  <span
+                    className="absolute block h-[1.5px] w-5 bg-current rounded-full transition-all duration-300 ease-in-out"
+                    style={{
+                      opacity: mobileOpen ? 0 : 1,
+                      transform: mobileOpen ? "scaleX(0)" : "scaleX(1)",
+                    }}
+                  />
+                  <span
+                    className="absolute block h-[1.5px] w-5 bg-current rounded-full transition-all duration-300 ease-in-out"
+                    style={{
+                      transform: mobileOpen
+                        ? "rotate(-45deg)"
+                        : "translateY(5px)",
+                    }}
+                  />
+                </span>
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.header>
