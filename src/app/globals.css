@@ -23,6 +23,18 @@
   color-scheme: dark;
 }
 
+@layer base {
+  ::selection {
+    background-color: #ff1f8f;
+    color: #0a0a0a;
+  }
+
+  ::-moz-selection {
+    background-color: #ff1f8f;
+    color: #0a0a0a;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
